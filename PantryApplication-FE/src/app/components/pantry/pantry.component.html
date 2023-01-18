@@ -1,0 +1,21 @@
+<!-- <button (click)="uiservice.addACharacter()">Create a character</button> -->
+<p>Here are the contents of your Pantry!</p>
+
+<table>
+    <thead>
+        <th>Name</th>
+        <th>Weight</th>
+        <th>Calories</th>
+        <!-- <th>Remove</th> -->
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let item of uiservice.returnPantry()">
+            <td>{{item.name}}</td>
+            <td>{{item.weight}}</td>
+            <td>{{item.calories}}</td>
+       
+            <!-- <td><button (click)="uiservice.deletePantry(user.id)" ><mat-icon> delete</mat-icon></button></td> -->
+        </tr>
+    </tbody>
+</table>

@@ -33,5 +33,11 @@ namespace PantryApplication_BE.Controllers
         {
             return Ok(await userService.AddUser(user));
         }
+
+        [HttpGet("login")]
+        public async Task<ActionResult<User>> LoginUser(string email, string password)
+        {
+            return Ok(await userService.LoginUser(email, password));
+        }
     }
 }

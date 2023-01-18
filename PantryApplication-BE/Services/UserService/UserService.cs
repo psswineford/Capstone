@@ -28,5 +28,18 @@ namespace PantryApplication_BE.Services.UserService
             await this.context.SaveChangesAsync();
             return await GetAllUsers();
         }
+
+        public async Task<ActionResult<User>> LoginUser(string email, string password)
+        {
+            foreach (var i in this.context.Users)
+            {
+                if (i.Email == email && i.Password == password)
+                {
+                    return await this.context.Users.FindAsync(i.Id);
+                }
+            }
+            throw new Exception("User Not Found");
+
+        }
     }
 }

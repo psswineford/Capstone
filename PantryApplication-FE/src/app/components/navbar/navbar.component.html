@@ -1,0 +1,17 @@
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="uiservice.setPantryPage()">Pantry</button>
+    <button mat-menu-item (click)="uiservice.setRecipesPage()">Recipes</button>
+    <button mat-menu-item (click)="uiservice.setFriendsPage()">Friends</button>
+  </mat-menu>
+  
+    <span>Welcome {{uiservice.getFirstName()}} !</span>
+    <span class="example-spacer"></span>
+
+    <button mat-icon-button class="example-icon" (click)="uiservice.logout()">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+  </mat-toolbar>

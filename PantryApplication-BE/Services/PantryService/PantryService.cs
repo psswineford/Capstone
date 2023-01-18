@@ -12,9 +12,10 @@ namespace PantryApplication_BE.Services.PantryService
             this.context = context;
         }
 
-        public async Task<ActionResult<List<Pantry>>> GetAllPantries()
+        public async Task<List<Pantry>> GetAllPantries()
         {
-            return await this.context.Pantries.ToListAsync();
+            var pantryItems = await this.context.Pantries.ToListAsync();
+            return pantryItems;
         }
 
         public async Task<ActionResult<List<Pantry>>> GetPantryById(int id)

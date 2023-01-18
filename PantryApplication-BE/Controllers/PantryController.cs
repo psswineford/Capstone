@@ -18,8 +18,15 @@ namespace PantryApplication_BE.Controllers
 
         [HttpGet]
         public async Task<ActionResult<List<Pantry>>> GetAllPantries()
+
         {
-            return Ok(await pantryService.GetAllPantries());
+            var response = await pantryService.GetAllPantries();
+            if(response == null)
+            {
+                return BadRequest("No Items in your Pantry");
+            }
+            return Ok(response);
+
         }
 
         [HttpGet("id")]
