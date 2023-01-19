@@ -18,6 +18,7 @@ export class UiService {
   private showRecipesPage: boolean = false
   private showFriendsPage: boolean = false
   private showAddPantryItemPage: boolean = false
+  private showAddUserPage: boolean = false
   private firstName: string = 'Please Login'
   private userId: number = 0
   private BASEURL: string = 'https://localhost:7214/api/'
@@ -56,8 +57,21 @@ export class UiService {
     return this.showAddPantryItemPage
   }
 
+  public getShowAddUserPage(): boolean {
+    return this.showAddUserPage
+  }
+
   public returnPantry(): Pantry[] {
     return this.pantry
+  }
+
+  public setLoginPage(): void {
+    this.showLoginPage = true
+    this.showPantryPage = false
+    this.showFriendsPage = false
+    this.showRecipesPage = false
+    this.showAddPantryItemPage = false
+    this.showAddUserPage = false
   }
 
   public  setPantryPage(): void {
@@ -66,6 +80,7 @@ export class UiService {
     this.showFriendsPage = false
     this.showRecipesPage = false
     this.showAddPantryItemPage = false
+    this.showAddUserPage = false
     this.getPantry(this.userId)
     
   }
@@ -76,6 +91,7 @@ export class UiService {
     this.showFriendsPage = false
     this.showRecipesPage = true
     this.showAddPantryItemPage = false
+    this.showAddUserPage = false
   }
 
   public  setFriendsPage(): void {
@@ -84,6 +100,7 @@ export class UiService {
     this.showFriendsPage = true
     this.showRecipesPage = false
     this.showAddPantryItemPage = false
+    this.showAddUserPage = false
   }
 
   public setAddPantryItemPage(): void {
@@ -92,6 +109,16 @@ export class UiService {
     this.showFriendsPage = false
     this.showRecipesPage = false
     this.showAddPantryItemPage = true
+    this.showAddUserPage = false
+  }
+
+  public setAddUserPage(): void {
+    this.showLoginPage = false
+    this.showPantryPage = false
+    this.showFriendsPage = false
+    this.showRecipesPage = false
+    this.showAddPantryItemPage = false
+    this.showAddUserPage = true
   }
 
 
@@ -104,7 +131,7 @@ export class UiService {
 
 
 
-  //login methods
+  //User methods
   public tryLogin(username: string, password: string) {
     this.http.get<User>(this.BASEURL + `User/login?email=${username}&password=${password}`)
       .pipe(take(1))
@@ -141,8 +168,29 @@ export class UiService {
     this.showRecipesPage = false
     this.showAddPantryItemPage = false
     localStorage.clear()
+    this.userId = 0
     this.firstName = "Please Login"
   }
+
+  public registerUser(email: string, password: string, firstName: string, lastName: string): void {
+    this.http.post<User>(this.BASEURL + `User`, {
+      email,
+      password, 
+      firstName,
+      lastName
+    }).pipe(take(1))
+      .subscribe({
+        next: user => {
+          this.showError('Succesfully Added, Please Login')
+          this.setLoginPage()
+        },
+        error: err => {
+          this.showError('Oops something went wrong')
+        }
+      })
+  }
+
+
 
 //pantry item methods
   public getPantry(id: number) {

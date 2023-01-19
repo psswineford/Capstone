@@ -12,5 +12,5 @@ export class LoginComponent {
   public password = ''
 
   constructor(public uiservice: UiService){}
-
+      
 }

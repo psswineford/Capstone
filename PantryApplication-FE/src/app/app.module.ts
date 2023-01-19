@@ -19,6 +19,7 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatCardModule} from '@angular/material/card';
+import { AddUserComponent } from './components/add-user/add-user.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {MatCardModule} from '@angular/material/card';
     PantryComponent,
     RecipesComponent,
     FriendsComponent,
-    AddPantryItemComponent
+    AddPantryItemComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,

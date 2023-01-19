@@ -1,5 +1,5 @@
-<mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" [matMenuTriggerFor]="menu">
+<mat-toolbar class="navbar">
+  <button mat-icon-button class=" menu-button"  [matMenuTriggerFor]="menu" *ngIf="!uiservice.getShowLogin()">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
@@ -8,8 +8,8 @@
     <button mat-menu-item (click)="uiservice.setFriendsPage()">Friends</button>
   </mat-menu>
   
-    <span>Welcome {{uiservice.getFirstName()}} !</span>
-    <span class="example-spacer"></span>
+    <span class="example-spacer">Pantry App! Welcome: {{uiservice.getFirstName()}}</span>
+
 
     <button mat-icon-button class="example-icon" (click)="uiservice.logout()">
       <mat-icon>exit_to_app</mat-icon>
