@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Enter Your Panrty Item</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="name">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Weight</mat-label>
+            <input type="number" matInput [(ngModel)]="weight">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Calories</mat-label>
+            <input type="number"  matInput [(ngModel)]="calories">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Quantity</mat-label>
+            <input type="number" matInput [(ngModel)]="quantity">
+        </mat-form-field>
+        
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button (click)="uiservice.createPantryItem(name, weight, calories, quantity)">Add</button>
+        <button (click)="uiservice.setPantryPage()">Cancel</button>
+    </mat-card-actions>
+</mat-card>
+
+
+
+

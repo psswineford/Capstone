@@ -6,7 +6,8 @@
         <th>Name</th>
         <th>Weight</th>
         <th>Calories</th>
-        <!-- <th>Remove</th> -->
+        <th>Quantity</th>
+        <th>Remove</th>
     </thead>
 
     <tbody>
@@ -14,8 +15,10 @@
             <td>{{item.name}}</td>
             <td>{{item.weight}}</td>
             <td>{{item.calories}}</td>
-       
-            <!-- <td><button (click)="uiservice.deletePantry(user.id)" ><mat-icon> delete</mat-icon></button></td> -->
+            <td>{{item.quantity}}</td>
+            <td><button (click)="uiservice.deletePantryItem(item.id)" ><mat-icon> delete</mat-icon></button></td>
         </tr>
     </tbody>
 </table>
+
+<button (click)="uiservice.setAddPantryItemPage()">Add an item</button>

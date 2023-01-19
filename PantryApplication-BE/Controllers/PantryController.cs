@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PantryApplication_BE.DTOs;
 using PantryApplication_BE.Services.PantryService;
 
 namespace PantryApplication_BE.Controllers
@@ -39,6 +40,12 @@ namespace PantryApplication_BE.Controllers
         public async Task<ActionResult<List<Pantry>>> AddPantry(Pantry pantry)
         {
           return Ok(await pantryService.AddPantry(pantry));
+        }
+
+        [HttpDelete("id")]
+        public async Task<ActionResult<List<Pantry>>> DeletePantryById(int id)
+        {
+            return Ok(await pantryService.DeletePantryById(id));
         }
     }
 }

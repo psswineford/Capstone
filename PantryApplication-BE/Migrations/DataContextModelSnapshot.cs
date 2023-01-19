@@ -36,10 +36,18 @@ namespace PantryApplication_BE.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Weight")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Weight")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Pantries");
                 });
@@ -71,6 +79,22 @@ namespace PantryApplication_BE.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("PantryApplication_BE.Models.Pantry", b =>
+                {
+                    b.HasOne("PantryApplication_BE.Models.User", "User")
+                        .WithMany("Pantries")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PantryApplication_BE.Models.User", b =>
+                {
+                    b.Navigation("Pantries");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,24 +12,24 @@ namespace PantryApplication_BE.Services.UserService
             this.context = context;
         }
 
-        public async Task<ActionResult<List<User>>> GetAllUsers()
+        public async Task<List<User>> GetAllUsers()
         {
             return await this.context.Users.ToListAsync();
         }
 
-        public async Task<ActionResult<List<User>>> GetUserById(int id)
+        public async Task<List<User>> GetUserById(int id)
         {
             return await this.context.Users.Where(u => u.Id == id).ToListAsync();
         }
 
-        public async Task<ActionResult<List<User>>> AddUser(User user)
+        public async Task<List<User>> AddUser(User user)
         {
             this.context.Users.Add(user);
             await this.context.SaveChangesAsync();
             return await GetAllUsers();
         }
 
-        public async Task<ActionResult<User>> LoginUser(string email, string password)
+        public async Task<User> LoginUser(string email, string password)
         {
             foreach (var i in this.context.Users)
             {

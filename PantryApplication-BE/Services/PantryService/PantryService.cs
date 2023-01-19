@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PantryApplication_BE.DTOs;
 
 namespace PantryApplication_BE.Services.PantryService
 {
@@ -18,9 +19,14 @@ namespace PantryApplication_BE.Services.PantryService
             return pantryItems;
         }
 
-        public async Task<ActionResult<List<Pantry>>> GetPantryById(int id)
+        public async Task<List<Pantry>> GetPantryById(int id)
         {
-            return await this.context.Pantries.Where(p => p.Id == id).ToListAsync();
+            var pantryItems = await this.context.Pantries
+                .Where(p => p.User.Id == id)
+                .ToListAsync();
+            
+            return pantryItems;
+                
         }
 
         public async Task<ActionResult<List<Pantry>>> AddPantry(Pantry pantry)
@@ -29,5 +35,15 @@ namespace PantryApplication_BE.Services.PantryService
             await this.context.SaveChangesAsync();
             return await GetAllPantries();
         }
+
+        public async Task<List<Pantry>> DeletePantryById(int id)
+        {
+            var pantryItems = await this.context.Pantries.FirstOrDefaultAsync(p => p.Id == id);
+            this.context?.Pantries.Remove(pantryItems);
+            await this.context.SaveChangesAsync();
+            return await GetAllPantries();
+        }
+
+        
     }
 }
