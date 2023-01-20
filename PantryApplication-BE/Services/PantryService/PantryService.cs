@@ -44,6 +44,20 @@ namespace PantryApplication_BE.Services.PantryService
             return await GetAllPantries();
         }
 
+        public async Task<List<Pantry>> UpdatePantry(Pantry updatePantry)
+        {
+            var pantryItem = await this.context.Pantries.FirstOrDefaultAsync(p => p.Id == updatePantry.Id);
+
+            pantryItem.Name = updatePantry.Name;
+            pantryItem.Weight= updatePantry.Weight;
+            pantryItem.Calories= updatePantry.Calories;
+            pantryItem.Quantity= updatePantry.Quantity;
+            pantryItem.UserId = updatePantry.UserId;
+
+            await this.context.SaveChangesAsync();
+            return await GetAllPantries();
+        }
+
         
     }
 }

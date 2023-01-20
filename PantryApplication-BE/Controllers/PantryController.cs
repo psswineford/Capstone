@@ -47,5 +47,17 @@ namespace PantryApplication_BE.Controllers
         {
             return Ok(await pantryService.DeletePantryById(id));
         }
+
+        [HttpPut]
+        public async Task<ActionResult<List<Pantry>>> UpdatePantryItem(Pantry updatePantry)
+        {
+            var response = await this.pantryService.UpdatePantry(updatePantry);
+            if(response == null)
+            {
+                return BadRequest("No pantry item found");
+            }
+
+            return Ok(response);
+        }
     }
 }

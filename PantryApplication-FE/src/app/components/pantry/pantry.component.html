@@ -3,21 +3,29 @@
 <p> <button (click)="uiservice.setAddPantryItemPage()">Add an item</button></p>
 
 <mat-card class="pantry-card" *ngFor="let item of uiservice.returnPantry()">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{item.name}}</mat-card-title>
-    </mat-card-header>
-    <img mat-card-image src="https://www.shutterstock.com/shutterstock/photos/1729774417/display_1500/stock-photo-pasta-rice-oatmeal-oil-potatoes-and-canned-food-in-paper-bag-on-wooden-background-top-view-1729774417.jpg" alt="Pantry Item">
-    <mat-card-content>
-      <ul>
-        <li>Weight: {{item.weight}}</li>
-        <li>Calories: {{item.calories}}</li>
-        <li>Quantity: {{item.quantity}}</li>
-      </ul>
-    </mat-card-content>
-    <mat-card-actions>
-        <button (click)="uiservice.deletePantryItem(item.id)" ><mat-icon> delete</mat-icon></button>
-    </mat-card-actions>
-  </mat-card>
-
- 
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{item.name}}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image
+    src="https://www.shutterstock.com/shutterstock/photos/1729774417/display_1500/stock-photo-pasta-rice-oatmeal-oil-potatoes-and-canned-food-in-paper-bag-on-wooden-background-top-view-1729774417.jpg"
+    alt="Pantry Item">
+  <mat-card-content>
+    <ul>
+      <li>Weight: {{item.weight}}</li>
+      <li>Calories: {{item.calories}}</li>
+      <li>Quantity: {{item.quantity}}</li>
+    </ul>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="addQuantity(item.id, item.name, item.weight, item.calories, item.quantity, item.userId)">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button (click)="deleteQuantity(item.id, item.name, item.weight, item.calories, item.quantity, item.userId)">
+      <mat-icon>remove</mat-icon>
+    </button>
+    <button (click)="uiservice.deletePantryItem(item.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

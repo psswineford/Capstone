@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core';
+import { NumberValueAccessor } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { take } from 'rxjs';
 import { Pantry } from '../Data/Pantry';
@@ -253,6 +254,27 @@ export class UiService {
           this.showError('Opps, something went wrong')
         }
       })
+  }
+
+  public updatePantryItem(id: number, name: string, weight: number, calories: number, quantity: number, userId: number){
+    this.http.put(this.BASEURL + `Pantry`, {
+      id,
+      name,
+      weight,
+      calories,
+      quantity,
+      userId
+    })
+    .pipe(take(1))
+    .subscribe({
+      next: c => {
+        this.setPantryPage()
+      },
+      error: err => {
+        this.showError('Opps, something went wrong')
+      }
+      
+    })
   }
 
   public deletePantryItem(id: number) {
