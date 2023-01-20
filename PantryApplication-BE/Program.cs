@@ -1,7 +1,9 @@
 global using PantryApplication_BE.Data;
 global using PantryApplication_BE.Models;
+global using PantryApplication_BE.DTOs;
 using Microsoft.EntityFrameworkCore;
 using PantryApplication_BE.Services.PantryService;
+using PantryApplication_BE.Services.RecipeService;
 using PantryApplication_BE.Services.UserService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +26,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IPantryService, PantryService>();
+builder.Services.AddTransient<IRecipeService, RecipeService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

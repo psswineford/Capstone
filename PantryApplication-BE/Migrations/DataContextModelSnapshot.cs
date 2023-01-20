@@ -52,6 +52,36 @@ namespace PantryApplication_BE.Migrations
                     b.ToTable("Pantries");
                 });
 
+            modelBuilder.Entity("PantryApplication_BE.Models.Recipe", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Ingredients")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Instructions")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Recipes");
+                });
+
             modelBuilder.Entity("PantryApplication_BE.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -92,9 +122,22 @@ namespace PantryApplication_BE.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("PantryApplication_BE.Models.Recipe", b =>
+                {
+                    b.HasOne("PantryApplication_BE.Models.User", "User")
+                        .WithMany("Recipes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("PantryApplication_BE.Models.User", b =>
                 {
                     b.Navigation("Pantries");
+
+                    b.Navigation("Recipes");
                 });
 #pragma warning restore 612, 618
         }

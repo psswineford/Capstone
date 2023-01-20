@@ -1,0 +1,24 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Enter Your Recipe Info</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="name">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Instructions</mat-label>
+            <input type="text" matInput [(ngModel)]="instructions">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Ingredients</mat-label>
+            <input type="text"  matInput [(ngModel)]="ingredients">
+        </mat-form-field>
+        
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button (click)="uiservice.createRecipeItem(name, instructions, ingredients)">Add</button>
+        <button (click)="uiservice.setPantryPage()">Cancel</button>
+    </mat-card-actions>
+</mat-card>

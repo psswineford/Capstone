@@ -1,1 +1,23 @@
-<p>recipes works!</p>
+<p>Here are all of your Recipes!</p>
+<p> <button (click)="uiservice.setAddRecipePage()">Add an item</button></p>
+
+<mat-card class="recipe-card" *ngFor="let item of uiservice.returnRecipe()">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{item.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="https://www.shutterstock.com/shutterstock/photos/1729774417/display_1500/stock-photo-pasta-rice-oatmeal-oil-potatoes-and-canned-food-in-paper-bag-on-wooden-background-top-view-1729774417.jpg" alt="Pantry Item">
+    <mat-card-content>
+      <ul>
+        <li>Instructions: {{item.instructions}}</li>
+        <li>ingredients: {{item.ingredients}}</li>
+      </ul>
+    </mat-card-content>
+    <mat-card-actions>
+        <a href="https://www.reddit.com/search/?q={{item.name}}%20recipe" target="_blank"><mat-icon>search</mat-icon></a>
+        <button (click)="uiservice.deleteRecipeItem(item.id)" ><mat-icon> delete</mat-icon></button>
+        
+    </mat-card-actions>
+  </mat-card>
+
+ 

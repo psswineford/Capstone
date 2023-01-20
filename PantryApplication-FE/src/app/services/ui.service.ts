@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { take } from 'rxjs';
 import { Pantry } from '../Data/Pantry';
+import { Recipe } from '../Data/Recipe';
 import { User } from '../Data/User';
 
 @Injectable({
@@ -13,12 +14,14 @@ export class UiService {
  
 
   private pantry: Pantry[] = []
+  private recipe: Recipe[] = []
   private showLoginPage: boolean = true
   private showPantryPage: boolean = false
   private showRecipesPage: boolean = false
   private showFriendsPage: boolean = false
   private showAddPantryItemPage: boolean = false
   private showAddUserPage: boolean = false
+  private showAddRecipePage: boolean = false
   private firstName: string = 'Please Login'
   private userId: number = 0
   private BASEURL: string = 'https://localhost:7214/api/'
@@ -61,8 +64,16 @@ export class UiService {
     return this.showAddUserPage
   }
 
+  public getShowAddRecipePage(): boolean {
+    return this.showAddRecipePage
+  }
+
   public returnPantry(): Pantry[] {
     return this.pantry
+  }
+
+  public returnRecipe(): Recipe [] {
+    return this.recipe
   }
 
   public setLoginPage(): void {
@@ -72,6 +83,7 @@ export class UiService {
     this.showRecipesPage = false
     this.showAddPantryItemPage = false
     this.showAddUserPage = false
+    this.showAddRecipePage = false
   }
 
   public  setPantryPage(): void {
@@ -81,6 +93,7 @@ export class UiService {
     this.showRecipesPage = false
     this.showAddPantryItemPage = false
     this.showAddUserPage = false
+    this.showAddRecipePage = false
     this.getPantry(this.userId)
     
   }
@@ -92,6 +105,8 @@ export class UiService {
     this.showRecipesPage = true
     this.showAddPantryItemPage = false
     this.showAddUserPage = false
+    this.showAddRecipePage = false
+    this.getRecipes(this.userId)
   }
 
   public  setFriendsPage(): void {
@@ -101,6 +116,7 @@ export class UiService {
     this.showRecipesPage = false
     this.showAddPantryItemPage = false
     this.showAddUserPage = false
+    this.showAddRecipePage = false
   }
 
   public setAddPantryItemPage(): void {
@@ -110,6 +126,7 @@ export class UiService {
     this.showRecipesPage = false
     this.showAddPantryItemPage = true
     this.showAddUserPage = false
+    this.showAddRecipePage = false
   }
 
   public setAddUserPage(): void {
@@ -119,6 +136,17 @@ export class UiService {
     this.showRecipesPage = false
     this.showAddPantryItemPage = false
     this.showAddUserPage = true
+    this.showAddRecipePage = false
+  }
+
+  public setAddRecipePage(): void {
+    this.showLoginPage = false
+    this.showPantryPage = false
+    this.showFriendsPage = false
+    this.showRecipesPage = false
+    this.showAddPantryItemPage = false
+    this.showAddUserPage = false
+    this.showAddRecipePage = true
   }
 
 
@@ -241,8 +269,54 @@ export class UiService {
     })
   }
 
+//Recipe Methods
 
- 
+public getRecipes(id: number) {
+  this.http.get<Recipe[]>(this.BASEURL + `Recipe/id?id=${id}`)
+    .pipe(take(1))
+    .subscribe({
+      next: data => {
+        this.recipe = data
+        this.returnRecipe()
+      },
+      error: err => {
+        this.showError('Opps, something went wrong')
+      }
+    })
+}
+
+
+public createRecipeItem(name: string, instructions: string, ingredients: string) {
+  this.http.post(this.BASEURL + `Recipe`, {
+    name,
+    instructions,
+    ingredients,
+    userId: this.userId
+  })
+    .pipe(take(1))
+    .subscribe({
+      next: c => {
+        this.setRecipesPage()
+      },
+      error: err => {
+        this.showError('Opps, something went wrong')
+      }
+    })
+}
+
+public deleteRecipeItem(id: number) {
+  this.http.delete<Recipe[]>(this.BASEURL + `Recipe/id?id=${id}`)
+  .pipe(take(1))
+  .subscribe({
+    next: data => {
+      this.recipe = data
+      this.getRecipes(this.userId)
+    },
+    error: err => {
+      this.showError('Opps, something went wrong')
+    }
+  })
+}
 
 
 
