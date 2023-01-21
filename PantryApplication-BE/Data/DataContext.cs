@@ -10,6 +10,7 @@ namespace PantryApplication_BE.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Pantry> Pantries { get; set; } 
         public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<PantryRecipe> PantriesRecipes { get; set; }
 
     }
 }

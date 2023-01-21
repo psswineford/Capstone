@@ -1,4 +1,6 @@
-﻿namespace PantryApplication_BE.Models
+﻿using System.Text.Json.Serialization;
+
+namespace PantryApplication_BE.Models
 {
     public class Recipe
     {
@@ -8,5 +10,7 @@
         public string Ingredients { get; set; } = string.Empty;
         public int UserId { get; set; }
         public User? User { get; set; }
+    
+
     }
 }

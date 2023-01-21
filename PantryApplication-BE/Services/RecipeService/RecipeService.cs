@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PantryApplication_BE.Models;
+using System.Collections.Immutable;
 
 namespace PantryApplication_BE.Services.RecipeService
 {
@@ -26,7 +27,7 @@ namespace PantryApplication_BE.Services.RecipeService
 
             return recipeItems;
         }
-            public async Task<List<Recipe>> AddRecipe(Recipe recipe)
+        public async Task<List<Recipe>> AddRecipe(Recipe recipe)
         {
             this.context.Recipes.Add(recipe);
             await this.context.SaveChangesAsync();
@@ -39,6 +40,36 @@ namespace PantryApplication_BE.Services.RecipeService
             this.context?.Recipes.Remove(recipeItems);
             await this.context.SaveChangesAsync();
             return await GetAllRecipes();
+        }
+
+        public async Task<RecipeContentsDTO> GetRecipeLinkById(int id)
+        {
+            var ingredientQuery = await (from r in this.context.Recipes
+                        join rp in this.context.PantriesRecipes on r.Id equals rp.RecipesId
+                        join p in this.context.Pantries on rp.PantriesId equals p.Id
+                        where r.Id == id
+                        select new RecipeItemDTO
+                        {
+                            IngredientName = p.Name,
+                        }).ToListAsync();
+
+            var recipeQuery = from r in this.context.Recipes
+                              where r.Id == id
+                              select r;
+
+            var recipeItem = recipeQuery.FirstOrDefault();
+
+            RecipeContentsDTO rContents = new RecipeContentsDTO
+            {
+                Name = recipeItem.Name,
+                Instructions = recipeItem.Instructions,
+                RecipeItems= ingredientQuery,
+            };
+
+            return rContents;
+            
+
+            
         }
     }
 }

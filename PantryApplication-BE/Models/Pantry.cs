@@ -1,4 +1,6 @@
-﻿namespace PantryApplication_BE.Models
+﻿using System.Text.Json.Serialization;
+
+namespace PantryApplication_BE.Models
 {
     public class Pantry
     {
@@ -7,9 +9,9 @@
         public decimal Weight { get; set; } = 0.0M;
         public int Calories { get; set; } = 0;
         public int Quantity { get; set; } = 0;
-        public int UserId { get; set; } 
+        public int UserId { get; set; }
+        [JsonIgnore]
         public User? User { get; set; }
-
 
     }
 }
