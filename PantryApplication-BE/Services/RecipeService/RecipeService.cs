@@ -67,9 +67,21 @@ namespace PantryApplication_BE.Services.RecipeService
             };
 
             return rContents;
-            
+        }
 
-            
+        public async Task<List<RecipeItemDTO>> GetRecipeItemsById(int id)
+        {
+            var ingredientQuery = await (from r in this.context.Recipes
+                                         join rp in this.context.PantriesRecipes on r.Id equals rp.RecipesId
+                                         join p in this.context.Pantries on rp.PantriesId equals p.Id
+                                         where r.Id == id
+                                         select new RecipeItemDTO
+                                         {
+                                             IngredientName = p.Name,
+                                         }).ToListAsync();
+
+        
+            return ingredientQuery;
         }
     }
 }

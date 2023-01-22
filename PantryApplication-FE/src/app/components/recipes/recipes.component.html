@@ -10,7 +10,8 @@
     <mat-card-content>
       <ul>
         <li>Instructions: {{item.instructions}}</li>
-        <li>ingredients: {{item.ingredients}}</li>
+        <li>Ingredients: {{item.ingredients}}</li>
+         
       </ul>
     </mat-card-content>
     <mat-card-actions>
@@ -20,4 +21,8 @@
     </mat-card-actions>
   </mat-card>
 
- 
+
+<!-- possible way to return ingredients of recipes -->
+  <!-- <ul>
+    <li *ngFor="let ingredient of uiservice.getRecipeItems(item.id)">{{ingredient.ingredientName}}</li>
+  </ul> -->

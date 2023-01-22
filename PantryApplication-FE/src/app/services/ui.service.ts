@@ -2,10 +2,14 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { NumberValueAccessor } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { Data } from '@angular/router';
 import { take } from 'rxjs';
 import { Pantry } from '../Data/Pantry';
 import { Recipe } from '../Data/Recipe';
+import { RecipeItems } from '../Data/RecipeItems';
 import { User } from '../Data/User';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +20,7 @@ export class UiService {
 
   private pantry: Pantry[] = []
   private recipe: Recipe[] = []
+  private recipeItems: RecipeItems[] = []
   private showLoginPage: boolean = true
   private showPantryPage: boolean = false
   private showRecipesPage: boolean = false
@@ -77,6 +82,11 @@ export class UiService {
     return this.recipe
   }
 
+  // public returnRecipeItems(id: number): RecipeItems [] {  
+  //   this.getRecipeItems(id)
+  //   return this.recipeItems
+  // }
+
   public setLoginPage(): void {
     this.showLoginPage = true
     this.showPantryPage = false
@@ -107,7 +117,6 @@ export class UiService {
     this.showAddPantryItemPage = false
     this.showAddUserPage = false
     this.showAddRecipePage = false
-    this.getRecipes(this.userId)
   }
 
   public  setFriendsPage(): void {
@@ -187,6 +196,7 @@ export class UiService {
     localStorage.setItem('username', user.email)
     localStorage.setItem('password', user.password)
     this.getPantry(user.id)
+    this.getRecipes(user.id)
   }
 
   public logout(): void {
@@ -299,7 +309,6 @@ public getRecipes(id: number) {
     .subscribe({
       next: data => {
         this.recipe = data
-        this.returnRecipe()
       },
       error: err => {
         this.showError('Opps, something went wrong')
@@ -338,6 +347,21 @@ public deleteRecipeItem(id: number) {
       this.showError('Opps, something went wrong')
     }
   })
+}
+
+public getRecipeItems(id: number): RecipeItems[] {
+  this.http.get<RecipeItems[]>(this.BASEURL + `Recipe/test?id=${id}`)
+  .pipe(take(1))
+  .subscribe({
+    next: data => {
+      this.recipeItems = data
+    },
+    error: err => {
+     this.showError('Opps, something went wrong')
+    }
+  })
+
+  return this.recipeItems
 }
 
 

@@ -31,8 +31,15 @@ namespace PantryApplication_BE.Services.PantryService
 
         public async Task<ActionResult<List<Pantry>>> AddPantry(Pantry pantry)
         {
-            this.context.Pantries.Add(pantry);
-            await this.context.SaveChangesAsync();
+            try
+            {
+                this.context.Pantries.Add(pantry);
+                await this.context.SaveChangesAsync();
+            }catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+           
             return await GetAllPantries();
         }
 
