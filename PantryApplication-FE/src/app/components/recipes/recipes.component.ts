@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { UiService } from 'src/app/services/ui.service';
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css']
 })
-export class RecipesComponent {
+export class RecipesComponent implements OnInit{
   searchName: string = ''
   searchString: string = ''
   constructor(public uiservice: UiService){}
@@ -17,6 +17,10 @@ export class RecipesComponent {
     this.searchName = name;
     this.searchString = `https://www.reddit.com/search/?q=${name}%20recipe`
     return this.searchString
+  }
+
+  ngOnInit(): void {
+    
   }
 
 }

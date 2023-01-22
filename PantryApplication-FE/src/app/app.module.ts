@@ -21,6 +21,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatCardModule} from '@angular/material/card';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { AddRecipeComponent } from './components/add-recipe/add-recipe.component';
+import { RecipeItemsComponent } from './components/recipe-items/recipe-items.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AddRecipeComponent } from './components/add-recipe/add-recipe.component
     FriendsComponent,
     AddPantryItemComponent,
     AddUserComponent,
-    AddRecipeComponent
+    AddRecipeComponent,
+    RecipeItemsComponent
   ],
   imports: [
     BrowserModule,

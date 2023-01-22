@@ -9,6 +9,7 @@
         public string LastName { get; set; } = string.Empty;
         public List<Pantry>? Pantries { get; set; }
         public List<Recipe>? Recipes { get; set; }
+        public List<Friend>? Friends { get; set;}
 
     }
 }
