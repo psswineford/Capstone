@@ -29,6 +29,7 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IPantryService, PantryService>();
 builder.Services.AddTransient<IRecipeService, RecipeService>();
 builder.Services.AddTransient<IFriendService, FriendService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

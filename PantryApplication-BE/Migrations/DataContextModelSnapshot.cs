@@ -30,6 +30,9 @@ namespace PantryApplication_BE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("FriendId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FriendName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

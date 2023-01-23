@@ -1,0 +1,13 @@
+body, p {
+    margin-left: 1rem;
+}
+
+
+.recipe-card {
+    max-width: 225px;
+    margin-left: 1rem;
+    display: inline-flex;
+    margin-top: 1rem;
+    background-color: antiquewhite;
+  }
+  

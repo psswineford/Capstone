@@ -18,7 +18,8 @@ namespace PantryApplication_BE.Services.FriendService
                                          where u.Id == id
                                          select new FriendListItemDTO
                                          {
-                                             FriendName = u.FirstName,
+                                             FriendName = f.FriendName,
+                                             FriendId = f.FriendId,
                                          }).ToListAsync();
 
 

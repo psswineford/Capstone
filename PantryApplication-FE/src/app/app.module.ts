@@ -22,6 +22,7 @@ import {MatCardModule} from '@angular/material/card';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { AddRecipeComponent } from './components/add-recipe/add-recipe.component';
 import { RecipeItemsComponent } from './components/recipe-items/recipe-items.component';
+import { FriendsRecipesComponent } from './components/friends-recipes/friends-recipes.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { RecipeItemsComponent } from './components/recipe-items/recipe-items.com
     AddPantryItemComponent,
     AddUserComponent,
     AddRecipeComponent,
-    RecipeItemsComponent
+    RecipeItemsComponent,
+    FriendsRecipesComponent
   ],
   imports: [
     BrowserModule,

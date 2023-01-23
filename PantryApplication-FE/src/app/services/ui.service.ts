@@ -4,6 +4,7 @@ import { NumberValueAccessor } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Data } from '@angular/router';
 import { BehaviorSubject, take } from 'rxjs';
+import { Friends } from '../Data/Friend';
 import { Pantry } from '../Data/Pantry';
 import { Recipe } from '../Data/Recipe';
 import { RecipeItems } from '../Data/RecipeItems';
@@ -20,7 +21,9 @@ export class UiService {
 
   private pantry: Pantry[] = []
   private recipe: Recipe[] = []
+  private friendRecipes: Recipe[] = []
   private recipeItems: RecipeItems[] =  []
+  private friendsList: Friends[] = []
   $recipeItems = new BehaviorSubject<RecipeItems[]>([])
   private showLoginPage: boolean = true
   private showPantryPage: boolean = false
@@ -29,6 +32,7 @@ export class UiService {
   private showAddPantryItemPage: boolean = false
   private showAddUserPage: boolean = false
   private showAddRecipePage: boolean = false
+  private showFriendsRecipes: boolean = false
   private firstName: string = 'Please Login'
   private userId: number = 0
   private BASEURL: string = 'https://localhost:7214/api/'
@@ -75,12 +79,24 @@ export class UiService {
     return this.showAddRecipePage
   }
 
+  public getShowFriendsRecipes(): boolean {
+    return this.showFriendsRecipes
+  }
+
   public returnPantry(): Pantry[] {
     return this.pantry
   }
 
+  public returnFriendsList(): Friends[] {
+    return this.friendsList
+  }
+
   public returnRecipe(): Recipe [] {
     return this.recipe
+  }
+
+  public returnFriendRecipes(): Recipe[] {
+    return this.friendRecipes
   }
 
   public returnRecipeItems(): RecipeItems [] {  
@@ -129,6 +145,7 @@ export class UiService {
     this.showAddPantryItemPage = false
     this.showAddUserPage = false
     this.showAddRecipePage = false
+    this.getFriends(this.userId)
   }
 
   public setAddPantryItemPage(): void {
@@ -364,9 +381,35 @@ public getRecipeItems(id: number): void {
  
 }
 
+//get Friend Info
+public getFriends(id: number) {
+  this.http.get<Friends[]>(this.BASEURL + `Friend?id=${id}`)
+    .pipe(take(1))
+    .subscribe({
+      next: data => {
+        this.friendsList = data
+      },
+      error: err => {
+        this.showError('Opps, something went wrong')
+      }
+    })
+}
 
+public loadFriendRecipes(id: number) {
+  this.http.get<Recipe[]>(this.BASEURL + `Recipe/id?id=${id}`)
+    .pipe(take(1))
+    .subscribe({
+      next: data => {
+        this.friendRecipes = data
+        
+      },
+      error: err => {
+        this.showError('Opps, something went wrong')
+      }
+    })
 
-
-
+    this.showFriendsRecipes = true
+        console.log(this.showFriendsRecipes)
+}
 
 }
