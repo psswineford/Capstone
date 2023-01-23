@@ -6,6 +6,7 @@ using PantryApplication_BE.Services.PantryService;
 using PantryApplication_BE.Services.RecipeService;
 using PantryApplication_BE.Services.UserService;
 using PantryApplication_BE.Services.FriendService;
+using PantryApplication_BE.Services.FriendInviteService;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -29,6 +30,7 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IPantryService, PantryService>();
 builder.Services.AddTransient<IRecipeService, RecipeService>();
 builder.Services.AddTransient<IFriendService, FriendService>();
+builder.Services.AddTransient<IFriendInviteService, FriendInviteService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -20,10 +20,53 @@ namespace PantryApplication_BE.Services.FriendService
                                          {
                                              FriendName = f.FriendName,
                                              FriendId = f.FriendId,
+                                             IsFriend = f.IsFriend,
                                          }).ToListAsync();
 
 
             return friendQuery;
+        }
+
+        public async Task<List<FriendListItemDTO>> AddFriend(AddFriendDTO request)
+        {
+            var fromFriend = await this.context.Users
+            .Where(c => c.FirstName == request.FromFriendName)
+            .FirstOrDefaultAsync();
+
+            var toFriend = await this.context.Users
+                .Where(c => c.FirstName == request.ToFriendName)
+                .FirstOrDefaultAsync();
+
+            Friend newFriend = new Friend
+            {
+                FriendName = toFriend.FirstName,
+                UserId = fromFriend.Id,
+                FriendId = toFriend.Id,
+                IsFriend = true
+            };
+
+            this.context.Friends.Add(newFriend);
+            await this.context.SaveChangesAsync();
+
+            await AddToFriendInviteTable(newFriend.Id, fromFriend.Id);
+
+            return await GetFriendsByUserID(fromFriend.Id);
+
+        }
+
+        public async Task<FriendUser> AddToFriendInviteTable(int friendId, int userId)
+        {
+            FriendUser newFriendUser = new FriendUser
+            {
+                FriendId = friendId,
+                UserId = userId
+            };
+
+            this.context.FriendUsers.Add(newFriendUser);
+            await this.context.SaveChangesAsync();
+
+            return newFriendUser;
+
         }
     }
 }

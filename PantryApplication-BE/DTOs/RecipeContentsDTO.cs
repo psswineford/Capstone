@@ -4,7 +4,7 @@
     {
         public string Name { get; set; } = string.Empty;
         public string Instructions { get; set; } = string.Empty;
-        public List<RecipeItemDTO> RecipeItems { get; set; }
+        public List<RecipeItemDTO>? RecipeItems { get; set; }
 
     }
 }

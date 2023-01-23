@@ -21,5 +21,11 @@ namespace PantryApplication_BE.Controllers
         {
             return Ok(await friendService.GetFriendsByUserID(id));
         }
+
+        [HttpPost]
+        public async Task<ActionResult<List<FriendListItemDTO>>> AddFriend(AddFriendDTO request)
+        {
+            return Ok (await friendService.AddFriend(request));
+        }
     }
 }

@@ -2,6 +2,7 @@
 <p> <button (click)="uiservice.setAddPantryItemPage()">Add a Friend</button></p>
 
 <mat-card class="friend-card" *ngFor="let item of uiservice.returnFriendsList()">
+  <div *ngIf="item.isFriend == true">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{item.friendName}}</mat-card-title>
@@ -12,6 +13,7 @@
     </button>
   
   </mat-card-actions>
+</div>
 </mat-card>
 
 <app-friends-recipes *ngIf="uiservice.getShowFriendsRecipes()"></app-friends-recipes>
