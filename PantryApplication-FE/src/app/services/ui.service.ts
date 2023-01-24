@@ -258,7 +258,7 @@ export class UiService {
           this.setLoginPage()
         },
         error: err => {
-          this.showError('Oops something went wrong')
+          this.showError(err + 'Unable to register user')
         }
       })
   }
@@ -271,7 +271,7 @@ export class UiService {
         this.userNames = user
       },
       error: err => {
-        this.showError('Oops something went wrong')
+        this.showError(err +'Unable to retrieve user names')
       }
     });
   }
@@ -289,7 +289,7 @@ export class UiService {
         console.log("add successfully")
       },
       error: err => {
-        this.showError('Opps, something went wrong')
+        this.showError(err +'Unable to send friend invite')
       }
     })
   }
@@ -302,7 +302,7 @@ export class UiService {
       this.friendName = data
       },
       error: err => {
-        this.showError('Oops')
+        this.showError(err + "unable to see friend invites")
       }
     })
   }
@@ -319,7 +319,7 @@ export class UiService {
         this.RemoveInvite(this.userId)
       },
       error: err => {
-        this.showError('Opps, something went wrong')
+        this.showError(err + 'unable to accept the invite')
       }
     })
   }
@@ -334,7 +334,7 @@ export class UiService {
         this.getFriendInvite(userId)
       },
       error: err => {
-        this.showError('oops, didnt go through')
+        this.showError(err +'unable to remove invite')
       }
     })
   }
@@ -349,7 +349,7 @@ export class UiService {
           this.returnPantry()
         },
         error: err => {
-          this.showError('Opps, something went wrong')
+          this.showError( err + 'Unable to retrieve pantry items')
         }
       })
   }
@@ -369,7 +369,7 @@ export class UiService {
           this.setPantryPage()
         },
         error: err => {
-          this.showError('Opps, something went wrong')
+          this.showError(err + 'unable to create pantry items')
         }
       })
   }
@@ -389,7 +389,7 @@ export class UiService {
         this.setPantryPage()
       },
       error: err => {
-        this.showError('Opps, something went wrong')
+        this.showError(err + 'unable to update pantry items')
       }
     })
   }
@@ -418,7 +418,7 @@ export class UiService {
         this.getPantry(this.userId)
       },
       error: err => {
-        this.showError('Opps, something went wrong')
+        this.showError(err + 'unable to delete')
       }
     })
   }
@@ -433,7 +433,7 @@ public getRecipes(id: number) {
         this.recipe = data
       },
       error: err => {
-        this.showError('Opps, something went wrong')
+        this.showError(err + 'unable to get recipes')
       }
     })
 }
@@ -456,7 +456,7 @@ public createRecipeItem(name: string, instructions: string, ingredients: string,
         this.setRecipesPage()
       },
       error: err => {
-        this.showError('Opps, something went wrong')
+        this.showError(err + 'Unable to create recipe')
       }
     })
 }
@@ -470,11 +470,11 @@ public deleteRecipeItem(id: number) {
       this.getRecipes(this.userId)
     },
     error: err => {
-      this.showError('Opps, something went wrong')
+      this.showError(err + 'unable to delete')
     }
   })
 }
-//This won't work because it always just gets the last bit of data try returning directly here
+//not currently working - leaving in to debug later
 public getRecipeItems(id: number): void {
   this.http.get<RecipeItems[]>(this.BASEURL + `Recipe/test?id=${id}`)
   .pipe(take(1))
@@ -483,7 +483,7 @@ public getRecipeItems(id: number): void {
       this.recipeItems = data
     },
     error: err => {
-     this.showError('Opps, something went wrong')
+     this.showError(err + 'unable to get recipe items')
     }
   })
 }
@@ -497,7 +497,7 @@ public getFriends(id: number) {
         this.friendsList = data
       },
       error: err => {
-        this.showError('Opps, something went wrong')
+        this.showError(err + 'unable to see friends')
       }
     })
 }
@@ -512,7 +512,7 @@ public loadFriendRecipes(id: number) {
         
       },
       error: err => {
-        this.showError('Opps, something went wrong')
+        this.showError(err + 'unable to see recipes')
       }
     })
 

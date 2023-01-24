@@ -36,9 +36,17 @@ namespace PantryApplication_BE.Services.UserService
 
         public async Task<List<User>> AddUser(User user)
         {
+            foreach(var i in this.context.Users.ToList())
+            {
+                if(i.Email.ToLower() == user.Email.ToLower())
+                {
+                    throw new Exception("User Already Exists");
+                }
+            }
             this.context.Users.Add(user);
             await this.context.SaveChangesAsync();
             return await GetAllUsers();
+
         }
 
         public async Task<User> LoginUser(string email, string password)
