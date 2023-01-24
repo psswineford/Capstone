@@ -17,6 +17,18 @@ namespace PantryApplication_BE.Services.UserService
             return await this.context.Users.ToListAsync();
         }
 
+        public async Task<List<UserNamesDTO>> GetAllUserNames()
+        {
+            var userQuery = await (from u in this.context.Users
+                                   select new UserNamesDTO
+                                   {
+                                       Name = u.FirstName
+                                   }).ToListAsync();
+
+            return userQuery;
+          
+        }
+
         public async Task<List<User>> GetUserById(int id)
         {
             return await this.context.Users.Where(u => u.Id == id).ToListAsync();

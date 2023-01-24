@@ -22,6 +22,12 @@ namespace PantryApplication_BE.Controllers
             return Ok(await userService.GetAllUsers());
         }
 
+        [HttpGet("usernames")]
+        public async Task<ActionResult<List<UserNamesDTO>>> GetAllUserNames()
+        {
+            return Ok(await userService.GetAllUserNames());
+        }
+
         [HttpGet("id")]
         public async Task<ActionResult<List<User>>> GetUserById(int id)
         {

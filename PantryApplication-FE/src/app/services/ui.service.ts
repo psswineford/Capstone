@@ -1,3 +1,4 @@
+import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { NumberValueAccessor } from '@angular/forms';
@@ -5,10 +6,12 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { Data } from '@angular/router';
 import { BehaviorSubject, take } from 'rxjs';
 import { Friends } from '../Data/Friend';
+import { FriendInviteInfo } from '../Data/FriendInviteInfo';
 import { Pantry } from '../Data/Pantry';
 import { Recipe } from '../Data/Recipe';
 import { RecipeItems } from '../Data/RecipeItems';
 import { User } from '../Data/User';
+import { UserName } from '../Data/UserName';
 
 
 
@@ -24,6 +27,8 @@ export class UiService {
   private friendRecipes: Recipe[] = []
   private recipeItems: RecipeItems[] =  []
   private friendsList: Friends[] = []
+  private userNames: UserName[] = []
+  private friendName: FriendInviteInfo[] = []
   $recipeItems = new BehaviorSubject<RecipeItems[]>([])
   private showLoginPage: boolean = true
   private showPantryPage: boolean = false
@@ -100,8 +105,19 @@ export class UiService {
   }
 
   public returnRecipeItems(): RecipeItems [] {  
-
     return this.recipeItems
+  }
+
+  public returnUserNames(): UserName [] {
+    return this.userNames
+  }
+
+  public returnFriendInviteInfo(): FriendInviteInfo[] {
+    return this.friendName
+  }
+
+  public returnUserId() : number {
+    return this.userId
   }
 
   public setLoginPage(): void {
@@ -247,7 +263,65 @@ export class UiService {
       })
   }
 
+  public getAllUserNames(): void {
+    this.http.get<UserName[]>(this.BASEURL + `User/usernames`)
+    .pipe(take(1))
+    .subscribe({
+      next: user => {
+        this.userNames = user
+      },
+      error: err => {
+        this.showError('Oops something went wrong')
+      }
+    });
+  }
 
+  //Add Friend Methods
+
+  public sendFriendInvite(fromFriend: string): void {
+    this.http.post(this.BASEURL + `FriendInvite`, {
+      fromFriendName: this.firstName,
+      toFriendName: fromFriend
+    }) 
+    .pipe(take(1))
+    .subscribe({
+      next: c => {
+        console.log("add successfully")
+      },
+      error: err => {
+        this.showError('Opps, something went wrong')
+      }
+    })
+  }
+
+  public getFriendInvite(id: number): void{
+    this.http.get<FriendInviteInfo[]>(this.BASEURL + `FriendInvite?id=${id}`)
+    .pipe(take(1))
+    .subscribe({
+      next: data => {
+      this.friendName = data
+      },
+      error: err => {
+        this.showError('Oops')
+      }
+    })
+  }
+
+  public AcceptInvite(toFriendName: string): void {
+    this.http.post(this.BASEURL + `Friend`, {
+      toFriendName,
+      fromFriendName: this.firstName
+    })
+    .pipe(take(1))
+    .subscribe({
+      next: c => {
+        console.log("add successfully")
+      },
+      error: err => {
+        this.showError('Opps, something went wrong')
+      }
+    })
+  }
 
 //pantry item methods
   public getPantry(id: number) {
@@ -401,6 +475,7 @@ public loadFriendRecipes(id: number) {
     .subscribe({
       next: data => {
         this.friendRecipes = data
+        this.showFriendsRecipes = true
         
       },
       error: err => {
@@ -408,8 +483,7 @@ public loadFriendRecipes(id: number) {
       }
     })
 
-    this.showFriendsRecipes = true
-        console.log(this.showFriendsRecipes)
+   
 }
 
 }

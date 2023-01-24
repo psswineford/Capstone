@@ -11,6 +11,11 @@ import { PantryComponent } from './components/pantry/pantry.component';
 import { RecipesComponent } from './components/recipes/recipes.component';
 import { FriendsComponent } from './components/friends/friends.component';
 import { AddPantryItemComponent } from './components/add-pantry-item/add-pantry-item.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
+import { AddRecipeComponent } from './components/add-recipe/add-recipe.component';
+import { RecipeItemsComponent } from './components/recipe-items/recipe-items.component';
+import { FriendsRecipesComponent } from './components/friends-recipes/friends-recipes.component';
+
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatIconModule} from '@angular/material/icon';
@@ -19,10 +24,7 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatCardModule} from '@angular/material/card';
-import { AddUserComponent } from './components/add-user/add-user.component';
-import { AddRecipeComponent } from './components/add-recipe/add-recipe.component';
-import { RecipeItemsComponent } from './components/recipe-items/recipe-items.component';
-import { FriendsRecipesComponent } from './components/friends-recipes/friends-recipes.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -50,7 +52,8 @@ import { FriendsRecipesComponent } from './components/friends-recipes/friends-re
     MatInputModule,
     BrowserAnimationsModule,
     MatMenuModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule
 
   ],
   providers: [],

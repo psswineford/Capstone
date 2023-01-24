@@ -17,7 +17,7 @@ namespace PantryApplication_BE.Services.FriendInviteService
 
             var inviteQuery = await (from f in this.context.FriendInvites
                                      join u in this.context.Users on f.FromFriendId equals u.Id
-                                     where f.FromFriendId == id
+                                     where f.ToUserId == id
                                      select new FriendInviteDTO
                                      {
                                          InviteID = f.Id,

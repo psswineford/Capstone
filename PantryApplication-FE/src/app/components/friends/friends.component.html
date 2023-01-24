@@ -1,5 +1,25 @@
 <p>Here are your friends!</p>
-<p> <button (click)="uiservice.setAddPantryItemPage()">Add a Friend</button></p>
+<p> <button (click)="showAddFriendSection()">Add a Friend</button></p>
+<p> <button (click)="showAcceptInvite()">View Invites</button></p>
+
+<div *ngIf="this.addFriendSection == true">
+  <mat-form-field appearance="fill">
+    <mat-label >Select</mat-label>
+    <mat-select [(ngModel)]="userSelect" >
+      <mat-option *ngFor="let users of uiservice.returnUserNames()" [value]="users.name">{{users.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <span><button (click)="uiservice.sendFriendInvite(userSelect)">Add</button></span>
+  <span><button (click)="unshowAddFriendSection()">Cancel</button></span>
+</div>
+
+<div *ngIf="this.acceptInviteSection == true">
+  Accept Invite Section
+  <ul>
+    <li *ngFor="let item of uiservice.returnFriendInviteInfo()"><button (click)="uiservice.AcceptInvite(item.fromFriendName)">{{item.fromFriendName}}</button></li>
+  </ul>
+  <span><button (click)="unShowAcceptInvite()">Cancel</button></span>
+</div>
 
 <mat-card class="friend-card" *ngFor="let item of uiservice.returnFriendsList()">
   <div *ngIf="item.isFriend == true">
@@ -17,3 +37,4 @@
 </mat-card>
 
 <app-friends-recipes *ngIf="uiservice.getShowFriendsRecipes()"></app-friends-recipes>
+
