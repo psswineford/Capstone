@@ -7,6 +7,5 @@
         Task<List<Recipe>> AddRecipe(Recipe recipe);
         Task<List<Recipe>> DeleteRecipeById(int id);
         Task<RecipeContentsDTO> GetRecipeLinkById(int id);
-        Task<List<RecipeItemDTO>> GetRecipeItemsById(int id);
     }
 }

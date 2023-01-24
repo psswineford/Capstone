@@ -15,5 +15,7 @@ namespace PantryApplication_BE.Data
         public DbSet<FriendUser> FriendUsers { get; set; }
         public DbSet<FriendInvite> FriendInvites { get; set;}
 
+        public DbSet<Ingredients> Ingredients { get; set;}
+
     }
 }

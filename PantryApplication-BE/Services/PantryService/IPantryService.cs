@@ -10,5 +10,7 @@ namespace PantryApplication_BE.Services.PantryService
         Task<ActionResult<List<Pantry>>> AddPantry(Pantry pantry);
         Task<List<Pantry>> DeletePantryById(int id);
         Task<List<Pantry>> UpdatePantry(Pantry updatePantry);
+
+        Task<List<Pantry>> UpdatePantryByName(UpdatePantryDTO updatePantry);
     }
 }

@@ -391,7 +391,21 @@ export class UiService {
       error: err => {
         this.showError('Opps, something went wrong')
       }
-      
+    })
+  }
+
+  public updatePantryByName(name: string): void {
+    this.http.put(this.BASEURL + `Pantry/pantrybyname`, {
+      name,
+    })
+    .pipe(take(1))
+    .subscribe({
+      next: c => {
+        this.setPantryPage()
+      },
+      error: err => {
+        this.showError(err)
+      }
     })
   }
 
@@ -425,11 +439,15 @@ public getRecipes(id: number) {
 }
 
 
-public createRecipeItem(name: string, instructions: string, ingredients: string) {
+public createRecipeItem(name: string, instructions: string, ingredients: string, ingredients2: string, ingredients3: string, ingredients4: string, ingredients5: string) {
   this.http.post(this.BASEURL + `Recipe`, {
     name,
     instructions,
     ingredients,
+    ingredients2,
+    ingredients3,
+    ingredients4,
+    ingredients5,
     userId: this.userId
   })
     .pipe(take(1))

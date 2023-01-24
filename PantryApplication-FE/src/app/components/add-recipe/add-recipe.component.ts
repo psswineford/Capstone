@@ -11,6 +11,11 @@ export class AddRecipeComponent {
   name: string = ''
   instructions: string = ''
   ingredients: string = ''
+  ingredients2: string = ''
+  ingredients3: string = ''
+  ingredients4: string = ''
+  ingredients5: string = ''
+
   userId: number = 0
   constructor(public uiservice: UiService){}
 }

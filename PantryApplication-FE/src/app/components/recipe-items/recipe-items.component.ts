@@ -23,6 +23,7 @@ export class RecipeItemsComponent implements OnInit {
   setRecipeItems(): void{
     console.log("set recipe items" + this.recipeItem)
      this.uiservice.getRecipeItems(this.recipeItem)
+     this.getRecipeItems()
      
   }
 
@@ -39,8 +40,6 @@ export class RecipeItemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.setRecipeItems()
-    this.getRecipeItems()
-
   }
 
 }

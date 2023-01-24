@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PantryApplication_BE.DTOs;
+using PantryApplication_BE.Models;
 
 namespace PantryApplication_BE.Services.PantryService
 {
@@ -24,9 +25,9 @@ namespace PantryApplication_BE.Services.PantryService
             var pantryItems = await this.context.Pantries
                 .Where(p => p.User.Id == id)
                 .ToListAsync();
-            
+
             return pantryItems;
-                
+
         }
 
         public async Task<ActionResult<List<Pantry>>> AddPantry(Pantry pantry)
@@ -35,11 +36,12 @@ namespace PantryApplication_BE.Services.PantryService
             {
                 this.context.Pantries.Add(pantry);
                 await this.context.SaveChangesAsync();
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-           
+
             return await GetAllPantries();
         }
 
@@ -56,15 +58,40 @@ namespace PantryApplication_BE.Services.PantryService
             var pantryItem = await this.context.Pantries.FirstOrDefaultAsync(p => p.Id == updatePantry.Id);
 
             pantryItem.Name = updatePantry.Name;
-            pantryItem.Weight= updatePantry.Weight;
-            pantryItem.Calories= updatePantry.Calories;
-            pantryItem.Quantity= updatePantry.Quantity;
+            pantryItem.Weight = updatePantry.Weight;
+            pantryItem.Calories = updatePantry.Calories;
+            pantryItem.Quantity = updatePantry.Quantity;
             pantryItem.UserId = updatePantry.UserId;
 
             await this.context.SaveChangesAsync();
             return await GetAllPantries();
         }
 
-        
+        public async Task<List<Pantry>> UpdatePantryByName(UpdatePantryDTO updatePantry)
+        {
+            var pantryItem = await this.context.Pantries.FirstOrDefaultAsync(p => p.Name == updatePantry.Name);
+            if (pantryItem != null)
+            {
+                try
+                {
+                    pantryItem.Name = pantryItem.Name;
+                    pantryItem.Weight = pantryItem.Weight;
+                    pantryItem.Calories = pantryItem.Calories;
+                    pantryItem.Quantity = pantryItem.Quantity -1;
+                    pantryItem.UserId = pantryItem.UserId;
+
+                    await this.context.SaveChangesAsync();
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+
+                return await GetAllPantries();
+            }
+
+            throw new Exception("None Pantry Items Found");
+        }
     }
 }

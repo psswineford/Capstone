@@ -59,5 +59,17 @@ namespace PantryApplication_BE.Controllers
 
             return Ok(response);
         }
+
+        [HttpPut("pantrybyname")]
+        public async Task<ActionResult<List<Pantry>>> UpdatePantryItemByName(UpdatePantryDTO updatePantry)
+        {
+            var response = await this.pantryService.UpdatePantryByName(updatePantry);
+            if (response == null)
+            {
+                return BadRequest("No pantry item found");
+            }
+
+            return Ok(response);
+        }
     }
 }

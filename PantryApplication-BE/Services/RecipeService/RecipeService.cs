@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PantryApplication_BE.DTOs;
 using PantryApplication_BE.Models;
 using System.Collections.Immutable;
 
@@ -25,7 +26,7 @@ namespace PantryApplication_BE.Services.RecipeService
                .Where(p => p.User.Id == id)
                .ToListAsync();
 
-       
+
             return recipeItems;
         }
         public async Task<List<Recipe>> AddRecipe(Recipe recipe)
@@ -46,13 +47,13 @@ namespace PantryApplication_BE.Services.RecipeService
         public async Task<RecipeContentsDTO> GetRecipeLinkById(int id)
         {
             var ingredientQuery = await (from r in this.context.Recipes
-                        join rp in this.context.PantriesRecipes on r.Id equals rp.RecipesId
-                        join p in this.context.Pantries on rp.PantriesId equals p.Id
-                        where r.Id == id
-                        select new RecipeItemDTO
-                        {
-                            IngredientName = p.Name,
-                        }).ToListAsync();
+                                         join rp in this.context.PantriesRecipes on r.Id equals rp.RecipesId
+                                         join p in this.context.Pantries on rp.PantriesId equals p.Id
+                                         where r.Id == id
+                                         select new RecipeItemDTO
+                                         {
+                                             IngredientName = p.Name,
+                                         }).ToListAsync();
 
             var recipeQuery = from r in this.context.Recipes
                               where r.Id == id
@@ -64,25 +65,12 @@ namespace PantryApplication_BE.Services.RecipeService
             {
                 Name = recipeItem.Name,
                 Instructions = recipeItem.Instructions,
-                RecipeItems= ingredientQuery,
+                RecipeItems = ingredientQuery,
             };
 
             return rContents;
         }
 
-        public async Task<List<RecipeItemDTO>> GetRecipeItemsById(int id)
-        {
-            var ingredientQuery = await (from r in this.context.Recipes
-                                         join rp in this.context.PantriesRecipes on r.Id equals rp.RecipesId
-                                         join p in this.context.Pantries on rp.PantriesId equals p.Id
-                                         where r.Id == id
-                                         select new RecipeItemDTO
-                                         {
-                                             IngredientName = p.Name,
-                                         }).ToListAsync();
-
-        
-            return ingredientQuery;
-        }
+   
     }
 }
