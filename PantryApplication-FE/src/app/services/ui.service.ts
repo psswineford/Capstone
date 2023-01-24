@@ -119,7 +119,7 @@ export class UiService {
   public returnUserId() : number {
     return this.userId
   }
-
+//setting state info
   public setLoginPage(): void {
     this.showLoginPage = true
     this.showPantryPage = false
