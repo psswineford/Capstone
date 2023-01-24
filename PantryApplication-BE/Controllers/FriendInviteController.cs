@@ -29,5 +29,11 @@ namespace PantryApplication_BE.Controllers
             return Ok(await inviteService.AddFriendRequest(request));
         }
 
+        [HttpDelete]
+        public async Task<ActionResult<List<FriendInviteDTO>>> DeleteFriendInvite(int userId)
+        {
+            return Ok(await inviteService.DeleteFriendRequest(userId));
+        }
+
     }
 }

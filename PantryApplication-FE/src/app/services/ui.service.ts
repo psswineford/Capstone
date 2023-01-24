@@ -316,9 +316,25 @@ export class UiService {
     .subscribe({
       next: c => {
         console.log("add successfully")
+        this.RemoveInvite(this.userId)
       },
       error: err => {
         this.showError('Opps, something went wrong')
+      }
+    })
+  }
+
+  public RemoveInvite(userId: number): void {
+    console.log("remove this id" + userId)
+    this.http.delete(this.BASEURL + `FriendInvite?userId=${userId}`)
+    .pipe(take(1))
+    .subscribe({
+      next: c => {
+        console.log("ID removed")
+        this.getFriendInvite(userId)
+      },
+      error: err => {
+        this.showError('oops, didnt go through')
       }
     })
   }
@@ -440,19 +456,18 @@ public deleteRecipeItem(id: number) {
     }
   })
 }
-
+//This won't work because it always just gets the last bit of data try returning directly here
 public getRecipeItems(id: number): void {
   this.http.get<RecipeItems[]>(this.BASEURL + `Recipe/test?id=${id}`)
   .pipe(take(1))
   .subscribe({
     next: data => {
-      this.$recipeItems.next(data)
+      this.recipeItems = data
     },
     error: err => {
      this.showError('Opps, something went wrong')
     }
   })
- 
 }
 
 //get Friend Info

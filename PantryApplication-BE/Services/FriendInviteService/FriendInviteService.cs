@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace PantryApplication_BE.Services.FriendInviteService
 {
@@ -50,6 +51,18 @@ namespace PantryApplication_BE.Services.FriendInviteService
             await this.context.SaveChangesAsync();
 
             return await GetFriendInvites(fromFriend.Id);
+        }
+
+        public async Task<List<FriendInviteDTO>> DeleteFriendRequest(int userId)
+        {
+            var toDelete = await this.context.FriendInvites
+                .Where(c => c.ToUserId == userId)
+                .FirstOrDefaultAsync();
+
+            this.context.FriendInvites.Remove(toDelete);
+            await this.context.SaveChangesAsync();
+
+            return await GetFriendInvites(userId);
         }
     }
 }

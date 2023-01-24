@@ -16,8 +16,12 @@
 <div *ngIf="this.acceptInviteSection == true">
   Accept Invite Section
   <ul>
-    <li *ngFor="let item of uiservice.returnFriendInviteInfo()"><button (click)="uiservice.AcceptInvite(item.fromFriendName)">{{item.fromFriendName}}</button></li>
+    <li *ngFor="let item of uiservice.returnFriendInviteInfo()"><button (click)="uiservice.AcceptInvite(item.fromFriendName)">{{item.fromFriendName}}
+     
+    </button></li>
   </ul>
+  <button (click)="uiservice.RemoveInvite(this.userId)">Delete</button>
+
   <span><button (click)="unShowAcceptInvite()">Cancel</button></span>
 </div>
 

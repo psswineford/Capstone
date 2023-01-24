@@ -4,5 +4,6 @@
     {
         Task<List<FriendInviteDTO>> GetFriendInvites(int id);
         Task<List<FriendInviteDTO>> AddFriendRequest(AddFriendDTO request);
+        Task<List<FriendInviteDTO>> DeleteFriendRequest(int userId);
     }
 }
