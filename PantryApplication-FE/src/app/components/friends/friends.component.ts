@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { FriendsService } from 'src/app/services/friends.service';
 import { UiService } from 'src/app/services/ui.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-friends',
@@ -12,10 +14,11 @@ export class FriendsComponent {
   acceptInviteSection: boolean = false
   userId: number = 0
 
-  constructor(public uiservice: UiService){
-   uiservice.getAllUserNames()
+  constructor(public uiservice: UiService, public userService: UserService, public friendService: FriendsService){
+   userService.getAllUserNames()
    this.userId = uiservice.returnUserId()
-   uiservice.getFriendInvite(this.userId)
+   friendService.getFriendInvite(this.userId)
+   friendService.getFriends(this.userId)
   }
 
   showAddFriendSection(): boolean {
@@ -33,3 +36,4 @@ export class FriendsComponent {
   }
 
 }
+//this.getFriends(this.userId)

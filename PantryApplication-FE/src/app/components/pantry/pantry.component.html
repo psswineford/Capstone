@@ -2,7 +2,7 @@
 <p>Here are the contents of your Pantry!</p>
 <p> <button (click)="uiservice.setAddPantryItemPage()">Add an item</button></p>
 
-<mat-card class="pantry-card" *ngFor="let item of uiservice.returnPantry()">
+<mat-card class="pantry-card" *ngFor="let item of pantryService.returnPantry()">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{item.name}}</mat-card-title>
@@ -24,8 +24,9 @@
     <button (click)="deleteQuantity(item.id, item.name, item.weight, item.calories, item.quantity, item.userId)">
       <mat-icon>remove</mat-icon>
     </button>
-    <button (click)="uiservice.deletePantryItem(item.id)">
+    <button (click)="pantryService.deletePantryItem(item.id)">
       <mat-icon>delete</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>
+

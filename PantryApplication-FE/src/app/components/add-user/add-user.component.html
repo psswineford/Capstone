@@ -22,7 +22,7 @@
         
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button (click)="uiservice.registerUser(email, password, firstName, lastName)">Add</button>
+        <button mat-button (click)="userService.registerUser(email, password, firstName, lastName)">Add</button>
         <button (click)="uiservice.setLoginPage()">Cancel</button>
     </mat-card-actions>
 </mat-card>

@@ -1,6 +1,6 @@
 <p>Your Friends Recipes</p>
 
-<mat-card class="recipe-card" *ngFor="let item of uiservice.returnFriendRecipes()">
+<mat-card class="recipe-card" *ngFor="let item of friendService.returnFriendRecipes()">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{item.name}}</mat-card-title>

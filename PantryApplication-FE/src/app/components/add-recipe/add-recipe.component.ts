@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PantryService } from 'src/app/services/pantry.service';
+import { RecipeService } from 'src/app/services/recipe.service';
 import { UiService } from 'src/app/services/ui.service';
 
 @Component({
@@ -17,5 +19,5 @@ export class AddRecipeComponent {
   ingredients5: string = ''
 
   userId: number = 0
-  constructor(public uiservice: UiService){}
+  constructor(public uiservice: UiService, public pantryService: PantryService, public recipeService: RecipeService){}
 }

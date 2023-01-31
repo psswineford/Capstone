@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+
 
 namespace PantryApplication_BE.Services.UserService
 {
@@ -55,6 +60,7 @@ namespace PantryApplication_BE.Services.UserService
             {
                 if (i.Email == email && i.Password == password)
                 {
+
                     return await this.context.Users.FindAsync(i.Id);
                 }
             }

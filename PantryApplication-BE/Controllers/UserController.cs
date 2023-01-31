@@ -42,8 +42,19 @@ namespace PantryApplication_BE.Controllers
 
         [HttpGet("login")]
         public async Task<ActionResult<User>> LoginUser(string email, string password)
+
         {
-            return Ok(await userService.LoginUser(email, password));
+            var userToLogin = await userService.LoginUser(email, password);
+
+        /*    var cookieOptions = new CookieOptions();
+            cookieOptions.HttpOnly = false;
+            cookieOptions.Expires = DateTime.Now.AddDays(1);
+            cookieOptions.Path = "/";
+
+            Response.Cookies.Append("userID", userToLogin.Id.ToString(), cookieOptions);  // sends cookies to the frontend
+            Response.Cookies.Append("firstName", userToLogin.FirstName, cookieOptions);*/
+
+            return Ok(userToLogin);
         }
     }
 }

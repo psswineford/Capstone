@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeItems } from 'src/app/Data/RecipeItems';
+import { PantryService } from 'src/app/services/pantry.service';
+import { RecipeService } from 'src/app/services/recipe.service';
 import { UiService } from 'src/app/services/ui.service';
 
 @Component({
@@ -11,7 +13,9 @@ export class RecipesComponent implements OnInit{
   searchName: string = ''
   searchString: string = ''
 
-  constructor(public uiservice: UiService){}
+  constructor(public uiservice: UiService, public pantryService: PantryService, public recipeService: RecipeService){
+    recipeService.getRecipes(uiservice.userId)
+  }
 
 
   
@@ -28,11 +32,11 @@ export class RecipesComponent implements OnInit{
     ingredients4: string,
     ingredients5: string,
     ) : void {
-      this.uiservice.updatePantryByName(ingredients);
-      this.uiservice.updatePantryByName(ingredients2);
-      this.uiservice.updatePantryByName(ingredients3);
-      this.uiservice.updatePantryByName(ingredients4);
-      this.uiservice.updatePantryByName(ingredients5);
+      this.pantryService.updatePantryByName(ingredients);
+      this.pantryService.updatePantryByName(ingredients2);
+      this.pantryService.updatePantryByName(ingredients3);
+      this.pantryService.updatePantryByName(ingredients4);
+      this.pantryService.updatePantryByName(ingredients5);
     }
 
 

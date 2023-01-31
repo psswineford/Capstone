@@ -26,6 +26,7 @@ builder.Services.AddCors(options =>
                       });
 });
 
+
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IPantryService, PantryService>();
 builder.Services.AddTransient<IRecipeService, RecipeService>();

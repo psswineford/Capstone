@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FriendsService } from 'src/app/services/friends.service';
 import { UiService } from 'src/app/services/ui.service';
 
 @Component({
@@ -8,5 +9,5 @@ import { UiService } from 'src/app/services/ui.service';
 })
 export class FriendsRecipesComponent {
 
-  constructor(public uiservice: UiService){}
+  constructor(public uiservice: UiService, public friendService: FriendsService){}
 }

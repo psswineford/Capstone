@@ -28,17 +28,17 @@
      <mat-card-content>
         <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput [(ngModel)]="username" (keydown.enter)="uiservice.tryLogin(username, password)">
+            <input matInput [(ngModel)]="username" (keydown.enter)="userService.tryLogin(username, password)">
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput type="password" [(ngModel)]="password" (keydown.enter)="uiservice.tryLogin(username, password)">
+            <input matInput type="password" [(ngModel)]="password" (keydown.enter)="userService.tryLogin(username, password)">
         </mat-form-field>
         <br>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button color="primary" class="login-inout button" (click)="uiservice.tryLogin(username, password)">Login</button>
+        <button mat-raised-button color="primary" class="login-inout button" (click)="userService.tryLogin(username, password)">Login</button>
         <button mat-raised-button color="primary" class="login-inout button" (click)="uiservice.setAddUserPage()">Register</button>
     </mat-card-actions>
   </mat-card>
