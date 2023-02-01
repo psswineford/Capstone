@@ -13,14 +13,14 @@ export class PantryService {
 
   private pantry: Pantry[] = []
 
-  private BASEURL: string = 'https://localhost:7214/api/'
+  //private BASEURL: string = 'https://localhost:7214/api/'
 
   public returnPantry(): Pantry[] {
     return this.pantry
   }
 
   public getPantry(id: number) {
-    this.http.get<Pantry[]>(this.BASEURL + `Pantry/id?id=${id}`)
+    this.http.get<Pantry[]>( `api/Pantry/id?id=${id}`)
       .pipe(take(1))
       .subscribe({
         next: data => {
@@ -35,7 +35,7 @@ export class PantryService {
 
   
   public createPantryItem(name: string, weight: number, calories: number, quantity: number) {
-    this.http.post(this.BASEURL + `Pantry`, {
+    this.http.post(`api/Pantry`, {
       name,
       weight,
       calories,
@@ -54,7 +54,7 @@ export class PantryService {
   }
 
   public updatePantryItem(id: number, name: string, weight: number, calories: number, quantity: number, userId: number){
-    this.http.put(this.BASEURL + `Pantry`, {
+    this.http.put( `api/Pantry`, {
       id,
       name,
       weight,
@@ -74,7 +74,7 @@ export class PantryService {
   }
 
   public updatePantryByName(name: string): void {
-    this.http.put(this.BASEURL + `Pantry/pantrybyname`, {
+    this.http.put( `api/Pantry/pantrybyname`, {
       name,
     })
     .pipe(take(1))
@@ -89,7 +89,7 @@ export class PantryService {
   }
 
   public deletePantryItem(id: number) {
-    this.http.delete<Pantry[]>(this.BASEURL + `Pantry/id?id=${id}`)
+    this.http.delete<Pantry[]>( `api/Pantry/id?id=${id}`)
     .pipe(take(1))
     .subscribe({
       next: data => {

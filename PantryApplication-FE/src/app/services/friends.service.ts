@@ -14,7 +14,7 @@ export class FriendsService {
   private friendRecipes: Recipe[] = []
   private friendsList: Friends[] = []
   private friendName: FriendInviteInfo[] = []
-  private BASEURL: string = 'https://localhost:7214/api/'
+  //private BASEURL: string = 'https://localhost:7214/api/'
 
   constructor(private http: HttpClient, public service: UiService) { }
 
@@ -32,7 +32,7 @@ export class FriendsService {
 
 
   public sendFriendInvite(fromFriend: string): void {
-    this.http.post(this.BASEURL + `FriendInvite`, {
+    this.http.post( `api/FriendInvite`, {
       fromFriendName: this.service.firstName,
       toFriendName: fromFriend
     }) 
@@ -48,7 +48,7 @@ export class FriendsService {
   }
 
   public getFriendInvite(id: number): void{
-    this.http.get<FriendInviteInfo[]>(this.BASEURL + `FriendInvite?id=${id}`)
+    this.http.get<FriendInviteInfo[]>( `api/FriendInvite?id=${id}`)
     .pipe(take(1))
     .subscribe({
       next: data => {
@@ -61,7 +61,7 @@ export class FriendsService {
   }
 
   public AcceptInvite(toFriendName: string): void {
-    this.http.post(this.BASEURL + `Friend`, {
+    this.http.post( `api/Friend`, {
       toFriendName,
       fromFriendName: this.service.firstName
     })
@@ -79,7 +79,7 @@ export class FriendsService {
 
   public RemoveInvite(userId: number): void {
     console.log("remove this id" + userId)
-    this.http.delete(this.BASEURL + `FriendInvite?userId=${userId}`)
+    this.http.delete( `api/FriendInvite?userId=${userId}`)
     .pipe(take(1))
     .subscribe({
       next: c => {
@@ -93,7 +93,7 @@ export class FriendsService {
   }
 
 public getFriends(id: number) {
-  this.http.get<Friends[]>(this.BASEURL + `Friend?id=${id}`)
+  this.http.get<Friends[]>( `api/Friend?id=${id}`)
     .pipe(take(1))
     .subscribe({
       next: data => {
@@ -106,7 +106,7 @@ public getFriends(id: number) {
 }
 
 public loadFriendRecipes(id: number) {
-  this.http.get<Recipe[]>(this.BASEURL + `Recipe/id?id=${id}`)
+  this.http.get<Recipe[]>( `api/Recipe/id?id=${id}`)
     .pipe(take(1))
     .subscribe({
       next: data => {

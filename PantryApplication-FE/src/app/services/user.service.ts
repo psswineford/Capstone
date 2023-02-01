@@ -13,7 +13,7 @@ import { UiService } from './ui.service';
 export class UserService {
 
   private userNames: UserName[] = []
-  private BASEURL: string = 'https://localhost:7214/api/'
+  //private BASEURL: string = 'https://localhost:7214/api/'
 
   constructor(private http: HttpClient, public service: UiService) { 
     const username = localStorage.getItem('username')
@@ -30,7 +30,7 @@ export class UserService {
 
 
   public tryLogin(username: string, password: string) {
-    this.http.get<User>(this.BASEURL + `User/login?email=${username}&password=${password}`)
+    this.http.get<User>(`api/User/login?email=${username}&password=${password}`)
       .pipe(take(1))
       .subscribe({
         next: user => {
@@ -45,7 +45,7 @@ export class UserService {
 
 
   public registerUser(email: string, password: string, firstName: string, lastName: string): void {
-    this.http.post<User>(this.BASEURL + `User`, {
+    this.http.post<User>( `api/User`, {
       email,
       password, 
       firstName,
@@ -63,7 +63,7 @@ export class UserService {
   }
 
   public getAllUserNames(): void {
-    this.http.get<UserName[]>(this.BASEURL + `User/usernames`)
+    this.http.get<UserName[]>( `api/User/usernames`)
     .pipe(take(1))
     .subscribe({
       next: user => {

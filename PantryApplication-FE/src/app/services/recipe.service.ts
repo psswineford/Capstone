@@ -15,7 +15,7 @@ export class RecipeService {
   private recipe: Recipe[] = []
   private recipeItems: RecipeItems[] =  []
 
-  private BASEURL: string = 'https://localhost:7214/api/'
+  //private BASEURL: string = 'https://localhost:7214/api/'
 
   public returnRecipe(): Recipe [] {
     return this.recipe
@@ -26,7 +26,7 @@ export class RecipeService {
   }
 
   public getRecipes(id: number) {
-    this.http.get<Recipe[]>(this.BASEURL + `Recipe/id?id=${id}`)
+    this.http.get<Recipe[]>( `api/Recipe/id?id=${id}`)
       .pipe(take(1))
       .subscribe({
         next: data => {
@@ -40,7 +40,7 @@ export class RecipeService {
   
   
   public createRecipeItem(name: string, instructions: string, ingredients: string, ingredients2: string, ingredients3: string, ingredients4: string, ingredients5: string) {
-    this.http.post(this.BASEURL + `Recipe`, {
+    this.http.post( `api/Recipe`, {
       name,
       instructions,
       ingredients,
@@ -63,7 +63,7 @@ export class RecipeService {
   }
   
   public deleteRecipeItem(id: number) {
-    this.http.delete<Recipe[]>(this.BASEURL + `Recipe/id?id=${id}`)
+    this.http.delete<Recipe[]>(`api/Recipe/id?id=${id}`)
     .pipe(take(1))
     .subscribe({
       next: data => {
@@ -77,7 +77,7 @@ export class RecipeService {
   }
   //not currently working - leaving in to debug later
   public getRecipeItems(id: number): void {
-    this.http.get<RecipeItems[]>(this.BASEURL + `Recipe/test?id=${id}`)
+    this.http.get<RecipeItems[]>( `api/Recipe/test?id=${id}`)
     .pipe(take(1))
     .subscribe({
       next: data => {
