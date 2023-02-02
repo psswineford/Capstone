@@ -21,6 +21,21 @@ namespace PantryApplication_BE.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("IngredientsRecipe", b =>
+                {
+                    b.Property<int>("IngredientsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RecipesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("IngredientsId", "RecipesId");
+
+                    b.HasIndex("RecipesId");
+
+                    b.ToTable("IngredientsRecipe");
+                });
+
             modelBuilder.Entity("PantryApplication_BE.Models.Friend", b =>
                 {
                     b.Property<int>("Id")
@@ -102,9 +117,6 @@ namespace PantryApplication_BE.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Ingredients");
@@ -141,25 +153,6 @@ namespace PantryApplication_BE.Migrations
                     b.ToTable("Pantries");
                 });
 
-            modelBuilder.Entity("PantryApplication_BE.Models.PantryRecipe", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("PantriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RecipesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PantriesRecipes");
-                });
-
             modelBuilder.Entity("PantryApplication_BE.Models.Recipe", b =>
                 {
                     b.Property<int>("Id")
@@ -167,26 +160,6 @@ namespace PantryApplication_BE.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Ingredients")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ingredients2")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ingredients3")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ingredients4")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ingredients5")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Instructions")
                         .IsRequired()
@@ -233,6 +206,21 @@ namespace PantryApplication_BE.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("IngredientsRecipe", b =>
+                {
+                    b.HasOne("PantryApplication_BE.Models.Ingredients", null)
+                        .WithMany()
+                        .HasForeignKey("IngredientsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PantryApplication_BE.Models.Recipe", null)
+                        .WithMany()
+                        .HasForeignKey("RecipesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PantryApplication_BE.Models.Friend", b =>

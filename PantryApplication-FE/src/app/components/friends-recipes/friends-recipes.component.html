@@ -1,21 +1,22 @@
 <p>Your Friends Recipes</p>
 
 <mat-card class="recipe-card" *ngFor="let item of friendService.returnFriendRecipes()">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{item.name}}</mat-card-title>
-    </mat-card-header>
-    <img mat-card-image src="https://www.shutterstock.com/shutterstock/photos/1729774417/display_1500/stock-photo-pasta-rice-oatmeal-oil-potatoes-and-canned-food-in-paper-bag-on-wooden-background-top-view-1729774417.jpg" alt="Pantry Item">
-    <mat-card-content>
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{item.name}}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image
+    src="https://www.shutterstock.com/shutterstock/photos/1729774417/display_1500/stock-photo-pasta-rice-oatmeal-oil-potatoes-and-canned-food-in-paper-bag-on-wooden-background-top-view-1729774417.jpg"
+    alt="Pantry Item">
+  <mat-card-content>
+    <ul>
+      <li>Instructions: {{item.instructions}}</li>
+      <li>Ingredients</li>
       <ul>
-        <li>Instructions: {{item.instructions}}</li>
-        <li>Ingredients</li>
-        <li>{{item.ingredients}}</li>
-        <li>{{item.ingredients2}}</li>
-        <li>{{item.ingredients3}}</li>
-        <li>{{item.ingredients4}}</li>
-        <li>{{item.ingredients5}}</li>
-         
+        <li *ngFor="let ingredients of item.ingredients">{{ingredients.ingredientName}}</li>
       </ul>
-    </mat-card-content>
-  </mat-card>
+
+
+    </ul>
+  </mat-card-content>
+</mat-card>

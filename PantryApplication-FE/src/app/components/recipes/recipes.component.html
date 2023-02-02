@@ -14,11 +14,7 @@
       <li>Instructions: {{item.instructions}}</li>
       <li>Ingredients</li>
       <ul>
-        <li>{{item.ingredients}}</li>
-        <li>{{item.ingredients2}}</li>
-        <li>{{item.ingredients3}}</li>
-        <li>{{item.ingredients4}}</li>
-        <li>{{item.ingredients5}}</li>
+        <li *ngFor="let ingredients of item.ingredients">{{ingredients.ingredientName}}</li>
       </ul>
 
     </ul>
@@ -26,7 +22,7 @@
   <mat-card-actions>
     <a href="https://www.reddit.com/search/?q={{item.name}}%20recipe" target="_blank"><mat-icon>search</mat-icon></a>
     <button (click)="recipeService.deleteRecipeItem(item.id)"><mat-icon> delete</mat-icon></button>
-    <button (click)="cookRecipe(item.ingredients, item.ingredients2, item.ingredients3,item. ingredients4, item.ingredients5)">Make This</button>
+    <!-- <button (click)="cookRecipe(item.ingredients, item.ingredients2, item.ingredients3,item. ingredients4, item.ingredients5)">Make This</button> -->
 
   </mat-card-actions>
 </mat-card>

@@ -46,12 +46,7 @@ namespace PantryApplication_BE.Controllers
             return Ok(await recipeService.DeleteRecipeById(id));
         }
 
-        [HttpGet("recipeitems")]
-
-        public async Task<ActionResult<List<RecipeContentsDTO>>> GetRecipeItems(int id)
-        {
-            return Ok(await recipeService.GetRecipeLinkById(id));
-        }
+   
 
       
 

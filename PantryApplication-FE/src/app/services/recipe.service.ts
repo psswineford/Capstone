@@ -39,15 +39,15 @@ export class RecipeService {
   }
   
   
-  public createRecipeItem(name: string, instructions: string, ingredients: string, ingredients2: string, ingredients3: string, ingredients4: string, ingredients5: string) {
+  public createRecipeItem(recipe: any) {
     this.http.post( `api/Recipe`, {
-      name,
-      instructions,
-      ingredients,
-      ingredients2,
-      ingredients3,
-      ingredients4,
-      ingredients5,
+      name: recipe.name,
+      instructions: recipe.instructions,
+      ingredients: [
+        {
+          ingredientName: recipe.ingredientName
+        }
+      ],
       userId: this.service.userId
     })
       .pipe(take(1))

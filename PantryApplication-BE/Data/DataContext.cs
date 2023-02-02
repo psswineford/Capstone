@@ -10,7 +10,6 @@ namespace PantryApplication_BE.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Pantry> Pantries { get; set; } 
         public DbSet<Recipe> Recipes { get; set; }
-        public DbSet<PantryRecipe> PantriesRecipes { get; set; }
         public DbSet<Friend> Friends { get; set; }
         public DbSet<FriendUser> FriendUsers { get; set; }
         public DbSet<FriendInvite> FriendInvites { get; set;}
