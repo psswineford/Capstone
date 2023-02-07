@@ -10,4 +10,8 @@ body, p {
     margin-top: 1rem;
     background-color: antiquewhite;
   }
+
+  .ingredients-list {
+    list-style-type: none; 
+  }
   

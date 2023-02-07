@@ -12,6 +12,7 @@ export class FriendsComponent {
   userSelect: string = ''
   addFriendSection: boolean = false
   acceptInviteSection: boolean = false
+  showFriendsSection: boolean = true
   userId: number = 0
 
   constructor(public uiservice: UiService, public userService: UserService, public friendService: FriendsService){
@@ -21,19 +22,39 @@ export class FriendsComponent {
    friendService.getFriends(this.userId)
   }
 
-  showAddFriendSection(): boolean {
-    return this.addFriendSection = true
-  }
-  unshowAddFriendSection(): boolean {
-   return  this.addFriendSection = false
+  checkFriendInvite(): void {
+    let invite = this.friendService.getFriendInvite(this.userId)
+    if(invite == null){
+      this.acceptInviteSection = false
+    }else
+    this.acceptInviteSection = true
+
   }
 
-  showAcceptInvite(): boolean {
-    return this.acceptInviteSection = true
+  showAddFriendSection(): void {
+    this.addFriendSection = true
+    this.acceptInviteSection = false
+    this.showFriendsSection = false
+
   }
-  unShowAcceptInvite(): boolean {
-    return this.acceptInviteSection = false
+  unshowAddFriendSection(): void {
+    this.addFriendSection = false
+    this.acceptInviteSection = false
+    this.showFriendsSection = true
   }
+
+  showAcceptInvite(): void {
+    this.addFriendSection = false
+    this.acceptInviteSection = true
+    this.showFriendsSection = false
+  }
+  unShowAcceptInvite(): void {
+    this.addFriendSection = false
+    this.acceptInviteSection = false
+    this.showFriendsSection = true
+  }
+
+
 
 }
 //this.getFriends(this.userId)

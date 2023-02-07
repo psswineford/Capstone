@@ -11,3 +11,7 @@ body, p {
     background-color: antiquewhite;
   }
   
+  .ingredients-list {
+    list-style-type: none; 
+  }
+  

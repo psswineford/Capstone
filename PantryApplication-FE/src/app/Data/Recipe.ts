@@ -4,11 +4,12 @@ export class Recipe {
         public name: string,
         public instructions: string,
         public userId: number,
-        public ingredients: [
-            {
-                ingredientName: string
-            }
-        ]
+        public ingredients: string,
+        public ingredients2: string,
+        public ingredients3: string,
+        public ingredients4: string,
+        public ingredients5: string,
+
     ){}
 }
 

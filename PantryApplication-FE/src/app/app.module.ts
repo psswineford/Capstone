@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -53,7 +54,8 @@ import {MatSelectModule} from '@angular/material/select';
     BrowserAnimationsModule,
     MatMenuModule,
     MatCardModule,
-    MatSelectModule
+    MatSelectModule,
+    ReactiveFormsModule
 
   ],
   providers: [],

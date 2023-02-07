@@ -7,8 +7,8 @@ namespace PantryApplication_BE.Models
         public int Id { get; set; }
         public string IngredientName { get; set; } = string.Empty;
 
-        [JsonIgnore]
-        public ICollection<Recipe>? Recipes { get; set; }
+    /*    [JsonIgnore]
+        public ICollection<Recipe>? Recipes { get; set; }*/
 
     }
 }

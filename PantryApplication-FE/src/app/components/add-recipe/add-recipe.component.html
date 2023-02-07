@@ -1,3 +1,5 @@
+
+
 <mat-card>
     <mat-card-header>
         <mat-card-title>Enter Your Recipe Info</mat-card-title>
@@ -13,29 +15,44 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Ingredients</mat-label>
-            <input type="text" matInput [(ngModel)]="ingredients">
+            <mat-select [(ngModel)]="ingredients">
+                <mat-option *ngFor="let users of pantryService.returnPantry()"
+                    [value]="users.name">{{users.name}}</mat-option>
+            </mat-select>
         </mat-form-field>
-        <!-- <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill">
             <mat-label>Ingredients2</mat-label>
-            <input type="text" matInput [(ngModel)]="ingredients2">
+            <mat-select [(ngModel)]="ingredients2">
+                <mat-option *ngFor="let users of pantryService.returnPantry()"
+                    [value]="users.name">{{users.name}}</mat-option>
+            </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Ingredients3</mat-label>
-            <input type="text" matInput [(ngModel)]="ingredients3">
+            <mat-select [(ngModel)]="ingredients3">
+                <mat-option *ngFor="let users of pantryService.returnPantry()"
+                    [value]="users.name">{{users.name}}</mat-option>
+            </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Ingredients4</mat-label>
-            <input type="text" matInput [(ngModel)]="ingredients4">
+            <mat-select [(ngModel)]="ingredients4">
+                <mat-option *ngFor="let users of pantryService.returnPantry()"
+                    [value]="users.name">{{users.name}}</mat-option>
+            </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Ingredients5</mat-label>
-            <input type="text" matInput [(ngModel)]="ingredients5">
-        </mat-form-field> -->
+            <mat-select [(ngModel)]="ingredients5">
+                <mat-option *ngFor="let users of pantryService.returnPantry()"
+                    [value]="users.name">{{users.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
     </mat-card-content>
     <mat-card-actions>
         <button mat-button
-            (click)="addRecipe(name, instructions, ingredients)">Add</button>
+            (click)="recipeService.createRecipeItem(name, instructions, ingredients, ingredients2, ingredients3, ingredients4, ingredients5)">Add</button>
         <button (click)="uiservice.setPantryPage()">Cancel</button>
     </mat-card-actions>
 </mat-card>

@@ -14,6 +14,7 @@ export class FriendsService {
   private friendRecipes: Recipe[] = []
   private friendsList: Friends[] = []
   private friendName: FriendInviteInfo[] = []
+  private sentInvite: boolean = false
   //private BASEURL: string = 'https://localhost:7214/api/'
 
   constructor(private http: HttpClient, public service: UiService) { }
@@ -27,6 +28,14 @@ export class FriendsService {
   }
 
   public returnFriendInviteInfo(): FriendInviteInfo[] {
+    return this.friendName
+  }
+
+  public returnSentInvite(): boolean {
+    return this. sentInvite
+  }
+
+  public returnFriendName(): FriendInviteInfo[] {
     return this.friendName
   }
 
@@ -53,6 +62,7 @@ export class FriendsService {
     .subscribe({
       next: data => {
       this.friendName = data
+      
       },
       error: err => {
         this.service.showError(err + "unable to see friend invites")

@@ -3,6 +3,7 @@ import { Recipe } from 'src/app/Data/Recipe';
 import { PantryService } from 'src/app/services/pantry.service';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UiService } from 'src/app/services/ui.service';
+import {  FormArray, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-add-recipe',
@@ -14,31 +15,13 @@ export class AddRecipeComponent {
   name: string = ''
   instructions: string = ''
   ingredients: string = ''
-
-  // newRecipe = {
-  //   name: '',
-  //   instructions: '',
-  //   ingredients: 
-  //     {
-  //       ingredientName: ''
-  //     },
-    
-  // }
-  
- 
-
-
+  ingredients2: string = ''
+  ingredients3: string = ''
+  ingredients4: string = ''
+  ingredients5: string = ''
   userId: number = 0
-  constructor(public uiservice: UiService, public pantryService: PantryService, public recipeService: RecipeService){}
 
-  addRecipe(name: string, instructions: string, ingredients: string): void {
-    var newRecipe = {
-      name: name,
-      instructions: instructions,
-       ingredientName: ingredients
-        
-      
-    }
-    this.recipeService.createRecipeItem(newRecipe)
-  }
+  constructor(public uiservice: UiService, public pantryService: PantryService, public recipeService: RecipeService) { }
+
+
 }

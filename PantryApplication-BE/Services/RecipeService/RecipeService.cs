@@ -17,7 +17,7 @@ namespace PantryApplication_BE.Services.RecipeService
         public async Task<List<Recipe>> GetAllRecipes()
         {
             var recipeItems = await this.context.Recipes
-            .Include(r => r.Ingredients)
+            //.Include(r => r.Ingredients)
             .ToListAsync();
             return recipeItems;
         }
@@ -26,7 +26,7 @@ namespace PantryApplication_BE.Services.RecipeService
         {
             var recipeItems = await this.context.Recipes
                .Where(p => p.User.Id == id)
-               .Include(r => r.Ingredients)
+               //.Include(r => r.Ingredients)
                .ToListAsync();
 
 

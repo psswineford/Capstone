@@ -1,44 +1,49 @@
-<p>Here are your friends!</p>
-<p> <button (click)="showAddFriendSection()">Add a Friend</button></p>
-<p> <button (click)="showAcceptInvite()">View Invites</button></p>
+<h2>Here are your friends!</h2>
+<button (click)="showAddFriendSection()">Add a Friend</button>
+ <button (click)="showAcceptInvite()">View Invites</button>
 
 <div *ngIf="this.addFriendSection == true">
+
   <mat-form-field appearance="fill">
-    <mat-label >Select</mat-label>
-    <mat-select [(ngModel)]="userSelect" >
+    <mat-label>Select</mat-label>
+    <mat-select [(ngModel)]="userSelect">
       <mat-option *ngFor="let users of userService.returnUserNames()" [value]="users.name">{{users.name}}</mat-option>
     </mat-select>
   </mat-form-field>
   <span><button (click)="friendService.sendFriendInvite(userSelect)">Add</button></span>
   <span><button (click)="unshowAddFriendSection()">Cancel</button></span>
+
 </div>
 
 <div *ngIf="this.acceptInviteSection == true">
   Accept Invite Section
   <ul>
-    <li *ngFor="let item of friendService.returnFriendInviteInfo()"><button (click)="friendService.AcceptInvite(item.fromFriendName)">{{item.fromFriendName}}
-     
-    </button></li>
+    <li *ngFor="let item of friendService.returnFriendInviteInfo()" >
+      <button (click)="friendService.AcceptInvite(item.fromFriendName)">
+        {{item.fromFriendName}}
+      </button>
+    </li>
   </ul>
   <button (click)="friendService.RemoveInvite(this.userId)">Delete</button>
 
   <span><button (click)="unShowAcceptInvite()">Cancel</button></span>
 </div>
 
+<div *ngIf="this.showFriendsSection == true">
 <mat-card class="friend-card" *ngFor="let item of friendService.returnFriendsList()">
   <div *ngIf="item.isFriend == true">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{item.friendName}}</mat-card-title>
-  </mat-card-header>
-  <mat-card-actions>
-    <button (click)="friendService.loadFriendRecipes(item.friendId)">
-      Get Recipes
-    </button>
-  
-  </mat-card-actions>
-</div>
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{item.friendName}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+      <button (click)="friendService.loadFriendRecipes(item.friendId)">
+        Get Recipes
+      </button>
+
+    </mat-card-actions>
+  </div>
 </mat-card>
+</div>
 
 <app-friends-recipes *ngIf="uiservice.getShowFriendsRecipes()"></app-friends-recipes>
-
