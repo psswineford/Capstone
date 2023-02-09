@@ -1,17 +1,26 @@
 <mat-toolbar class="navbar">
-  <button mat-icon-button class=" menu-button"  [matMenuTriggerFor]="menu" *ngIf="!uiservice.getShowLogin()">
+
+
+  <span class="navbarText">Pantry App! Welcome: {{uiservice.getFirstName()}}</span>
+  <div *ngIf="!uiservice.getShowLogin()">
+    <button class="myButton" (click)="uiservice.setPantryPage()">Pantry</button>
+    <button class="myButton" (click)="uiservice.setRecipesPage()">Recipes</button>
+    <button class="myButton" (click)="uiservice.setFriendsPage()">Friends</button>
+  </div>
+  <button mat-icon-button class="logoutButton" (click)="uiservice.logout()">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>
+
+
+
+
+
+<!-- <button mat-icon-button class=" menu-button"  [matMenuTriggerFor]="menu" *ngIf="!uiservice.getShowLogin()">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="uiservice.setPantryPage()">Pantry</button>
     <button mat-menu-item (click)="uiservice.setRecipesPage()">Recipes</button>
     <button mat-menu-item (click)="uiservice.setFriendsPage()">Friends</button>
-  </mat-menu>
-  
-    <span class="example-spacer">Pantry App! Welcome: {{uiservice.getFirstName()}}</span>
-
-
-    <button mat-icon-button class="example-icon" (click)="uiservice.logout()">
-      <mat-icon>exit_to_app</mat-icon>
-    </button>
-  </mat-toolbar>
+  </mat-menu> -->

@@ -1,32 +1,38 @@
-<h2>Here are your friends!</h2>
-<button (click)="showAddFriendSection()">Add a Friend</button>
- <button (click)="showAcceptInvite()">View Invites</button>
+<h3>Here are your friends!</h3>
+<button class="cardButtons" (click)="showAddFriendSection()">Add a Friend</button>
+ <button class="cardButtons" (click)="showAcceptInvite()">View Invites</button>
 
-<div *ngIf="this.addFriendSection == true">
-
+<div *ngIf="this.addFriendSection == true" class="container">
+<mat-card class="add-friend-card">
   <mat-form-field appearance="fill">
-    <mat-label>Select</mat-label>
+    <mat-card-header>
+      <mat-card-title>Select friend</mat-card-title>
+    </mat-card-header>
     <mat-select [(ngModel)]="userSelect">
       <mat-option *ngFor="let users of userService.returnUserNames()" [value]="users.name">{{users.name}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <span><button (click)="friendService.sendFriendInvite(userSelect)">Add</button></span>
-  <span><button (click)="unshowAddFriendSection()">Cancel</button></span>
+  <mat-card-actions>
+    <button class="cardButtons" (click)="friendService.sendFriendInvite(userSelect)">Add</button>
+   <button class="cardButtons" (click)="unshowAddFriendSection()">Cancel</button>
 
+  </mat-card-actions>
+
+</mat-card>
 </div>
 
 <div *ngIf="this.acceptInviteSection == true">
-  Accept Invite Section
+  <h3>Accept Invite Section</h3>
   <ul>
     <li *ngFor="let item of friendService.returnFriendInviteInfo()" >
-      <button (click)="friendService.AcceptInvite(item.fromFriendName)">
+      <button class="cardButtons" (click)="friendService.AcceptInvite(item.fromFriendName)">
         {{item.fromFriendName}}
       </button>
     </li>
   </ul>
-  <button (click)="friendService.RemoveInvite(this.userId)">Delete</button>
+  <button class="cardButtons"  (click)="friendService.RemoveInvite(this.userId)">Delete</button>
 
-  <span><button (click)="unShowAcceptInvite()">Cancel</button></span>
+  <span><button class="cardButtons"  (click)="unShowAcceptInvite()">Cancel</button></span>
 </div>
 
 <div *ngIf="this.showFriendsSection == true">
@@ -37,7 +43,7 @@
       <mat-card-title>{{item.friendName}}</mat-card-title>
     </mat-card-header>
     <mat-card-actions>
-      <button (click)="friendService.loadFriendRecipes(item.friendId)">
+      <button class="cardButtons"  (click)="friendService.loadFriendRecipes(item.friendId)">
         Get Recipes
       </button>
 

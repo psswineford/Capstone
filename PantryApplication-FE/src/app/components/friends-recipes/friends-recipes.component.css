@@ -5,10 +5,11 @@ body, p {
 
 .recipe-card {
     max-width: 225px;
+    font-family: Comic Sans MS;
     margin-left: 1rem;
     display: inline-flex;
     margin-top: 1rem;
-    background-color: antiquewhite;
+    background:linear-gradient(to bottom, #88ece4  5%, #72997f 100%)
   }
 
   .ingredients-list {
