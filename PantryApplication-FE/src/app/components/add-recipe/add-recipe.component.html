@@ -5,44 +5,61 @@
         <mat-card-title><h3>Enter Your Recipe Info</h3></mat-card-title>
     </mat-card-header>
     <mat-card-content class="recipe-field">
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
             <input matInput [(ngModel)]="name">
         </mat-form-field>
-        <mat-form-field appearance="fill" >
+        <mat-form-field appearance="outline" >
             <mat-label>Instructions</mat-label>
             <input type="text" matInput [(ngModel)]="instructions">
         </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Ingredients</mat-label>
+        <mat-form-field appearance="outline">
+            <mat-label>First Ingredient</mat-label>
             <mat-select [(ngModel)]="ingredients">
                 <mat-option *ngFor="let users of pantryService.returnPantry()"
                     [value]="users.name">{{users.name}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Ingredients2</mat-label>
+        <button class="cardButtons" mat-icon-button color="primary"  (click)="setShowIngredients2()">
+            <mat-icon>add_circle</mat-icon>
+        </button>
+
+        <mat-form-field appearance="outline" *ngIf="returnShowIngredients2()">
+            <mat-label>Second Ingredient</mat-label>
             <mat-select [(ngModel)]="ingredients2">
                 <mat-option *ngFor="let users of pantryService.returnPantry()"
                     [value]="users.name">{{users.name}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Ingredients3</mat-label>
+        <button class="cardButtons" mat-icon-button color="primary" *ngIf="returnShowIngredients2()"  (click)="setShowIngredients3()">
+            <mat-icon>add_circle</mat-icon>
+        </button>
+        
+        <mat-form-field appearance="outline" *ngIf="returnShowIngredients3()">
+            <mat-label>Third Ingredient</mat-label>
             <mat-select [(ngModel)]="ingredients3">
                 <mat-option *ngFor="let users of pantryService.returnPantry()"
                     [value]="users.name">{{users.name}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Ingredients4</mat-label>
+        <button class="cardButtons" mat-icon-button color="primary" *ngIf="returnShowIngredients3()"  (click)="setShowIngredients4()">
+            <mat-icon>add_circle</mat-icon>
+        </button>
+
+        <mat-form-field appearance="outline" *ngIf="returnShowIngredients4()">
+            <mat-label>Fourth Ingredient</mat-label>
             <mat-select [(ngModel)]="ingredients4">
                 <mat-option *ngFor="let users of pantryService.returnPantry()"
                     [value]="users.name">{{users.name}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Ingredients5</mat-label>
+        <button class="cardButtons" mat-icon-button color="primary"  *ngIf="returnShowIngredients4()" (click)="setShowIngredients5()">
+            <mat-icon>add_circle</mat-icon>
+        </button>
+
+
+        <mat-form-field appearance="outline" *ngIf="returnShowIngredients5()">
+            <mat-label>Fifth Ingredient</mat-label>
             <mat-select [(ngModel)]="ingredients5">
                 <mat-option *ngFor="let users of pantryService.returnPantry()"
                     [value]="users.name">{{users.name}}</mat-option>
