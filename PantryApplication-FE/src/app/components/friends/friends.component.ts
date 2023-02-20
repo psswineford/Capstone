@@ -31,6 +31,11 @@ export class FriendsComponent {
 
   }
 
+  acceptInvite(fromFriendName: string): void {
+    this.friendService.AcceptInvite(fromFriendName)
+    this.showAddFriendSection()
+  }
+
   showAddFriendSection(): void {
     this.addFriendSection = true
     this.acceptInviteSection = false
